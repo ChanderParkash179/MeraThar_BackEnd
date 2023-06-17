@@ -46,16 +46,7 @@ public class AppConstants {
 
 
     // HOTEL MESSAGE CONTAINER
-    public static final String MSG_NO_HOTELS_AVAILABLE = "Current City don't have Hotels";
-    public static final String MSG_HOTELS_AVAILABLE = "All Available Hotels in the City are shown below!";
-    public static final String MSG_DUPLICATE_HOTEL = "Requested Hotel Already Exists";
-    public static final String MSG_HOTEL_ADDED_SUCCESSFULLY = "Hotel Added Successfully";
-
-    public static final String MSG_NO_ROOM_FOUND = "No Such Room Founded against the Provided Room's Parameters";
-    public static final String MSG_ROOM_NUMBER_EMPTY = "Room Number can't be Empty -or- Null";
-    public static final String MSG_DUPLICATE_ROOM_NUMBER = "Requested Room Already Available";
-    public static final String MSG_ROOM_ADDED_SUCCESSFULLY = "Room Added Successfully";
-    public static final String MSG_NO_ROOM_AVAILABLE = "No Room Available against the provided request parameter";
-    public static final String MSG_ROOM_AVAILABLE = "Available Room in the Hotel is shown below!";
+    public static final String MSG_INVALID_HOTEL_ID = "Invalid -or- Empty -or- Wrong Tourist Id";
+    public static final String MSG_INVALID_HOTEL_NAME = "Invalid -or- Empty -or- Wrong Tourist Point Name";
 
 }

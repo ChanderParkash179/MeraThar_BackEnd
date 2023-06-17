@@ -1,6 +1,7 @@
 package com.mera.thar.back_app.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,8 +33,8 @@ public class TouristPoint {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 
     public TouristPoint(Integer id, String name, String location, String description, City city) {

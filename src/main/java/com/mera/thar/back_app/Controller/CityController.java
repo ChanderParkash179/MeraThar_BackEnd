@@ -45,7 +45,7 @@ public class CityController {
         }
     }
 
-    @PostMapping("save/")
+    @PostMapping("save")
     private ResponseEntity<?> addCity(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.cityService.save(request), HttpStatus.CREATED);
@@ -54,7 +54,7 @@ public class CityController {
         }
     }
 
-    @PostMapping("update/")
+    @PostMapping("update")
     private ResponseEntity<?> updateCity(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.cityService.update(request), HttpStatus.CREATED);
@@ -63,7 +63,7 @@ public class CityController {
         }
     }
 
-    @PostMapping("delete/")
+    @PostMapping("delete")
     private ResponseEntity<?> deleteCity(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.cityService.delete(request), HttpStatus.OK);

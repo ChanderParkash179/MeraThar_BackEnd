@@ -26,7 +26,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     public Response getAllTouristPointsByCityName(Map<String, Object> input) {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
 
         try {
             if (input == null) {

@@ -45,7 +45,7 @@ public class TouristPointController {
         }
     }
 
-    @PostMapping("save/")
+    @PostMapping("save")
     private ResponseEntity<?> addTouristPoints(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.touristPointService.save(request), HttpStatus.CREATED);
@@ -54,7 +54,7 @@ public class TouristPointController {
         }
     }
 
-    @PostMapping("update/")
+    @PostMapping("update")
     private ResponseEntity<?> updateTouristPoints(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.touristPointService.update(request), HttpStatus.CREATED);
@@ -63,7 +63,7 @@ public class TouristPointController {
         }
     }
 
-    @PostMapping("delete/")
+    @PostMapping("delete")
     private ResponseEntity<?> deleteTouristPoints(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.touristPointService.delete(request), HttpStatus.OK);
@@ -72,7 +72,7 @@ public class TouristPointController {
         }
     }
 
-    @PostMapping("get/city-name/")
+    @PostMapping("get/city-name")
     private ResponseEntity<?> getAllTouristPointsByCityName(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.touristPointService.getAllTouristPointsByCityName(request), HttpStatus.OK);

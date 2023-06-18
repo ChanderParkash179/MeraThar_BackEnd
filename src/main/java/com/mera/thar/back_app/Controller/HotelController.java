@@ -45,7 +45,7 @@ public class HotelController {
         }
     }
 
-    @PostMapping("save/")
+    @PostMapping("save")
     private ResponseEntity<?> addHotel(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.hotelService.save(request), HttpStatus.CREATED);
@@ -54,7 +54,7 @@ public class HotelController {
         }
     }
 
-    @PostMapping("update/")
+    @PostMapping("update")
     private ResponseEntity<?> updateHotel(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.hotelService.update(request), HttpStatus.CREATED);
@@ -63,7 +63,7 @@ public class HotelController {
         }
     }
 
-    @PostMapping("delete/")
+    @PostMapping("delete")
     private ResponseEntity<?> deleteHotel(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.hotelService.delete(request), HttpStatus.OK);
@@ -72,7 +72,7 @@ public class HotelController {
         }
     }
 
-    @PostMapping("get/city-name/")
+    @PostMapping("get/city-name")
     private ResponseEntity<?> getAllHotelsByCityName(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.hotelService.getAllHotelsByCityName(request), HttpStatus.OK);

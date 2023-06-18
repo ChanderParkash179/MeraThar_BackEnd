@@ -11,7 +11,6 @@ import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Column;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class HotelServiceImpl implements HotelService {
     public Response getAllHotelsByCityName(Map<String, Object> input) {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
 
         try {
             if (input == null) {

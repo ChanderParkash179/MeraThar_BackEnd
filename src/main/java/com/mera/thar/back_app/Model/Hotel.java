@@ -13,20 +13,15 @@ import javax.persistence.*;
 public class Hotel {
 
     @Id
-    @SequenceGenerator(
-            name = "hotel_sequence",
-            sequenceName = "hotel_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hotel_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hotel_id")
     private Integer id;
     @Column(name = "hotel_name")
     private String name;
     @Column(name = "hotel_address")
     private String address;
-    @Column(name = "hotel_rooms")
-    private int numberOfRooms;
+    @Column(name = "hotel_phone")
+    private String phone;
     @Column(name = "hotel_ratings")
     private double rating;
 
@@ -38,34 +33,34 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(String name, String address, int numberOfRooms, double rating, City city) {
+    public Hotel(String name, String address, String phone, double rating, City city) {
         this.name = name;
         this.address = address;
-        this.numberOfRooms = numberOfRooms;
+        this.phone = phone;
         this.rating = rating;
         this.city = city;
     }
 
-    public Hotel(Integer id, String name, String address, int numberOfRooms, double rating) {
+    public Hotel(Integer id, String name, String address, String phone, double rating) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.numberOfRooms = numberOfRooms;
+        this.phone = phone;
         this.rating = rating;
     }
 
-    public Hotel(String name, String address, int numberOfRooms, double rating) {
+    public Hotel(String name, String address, String phone, double rating) {
         this.name = name;
         this.address = address;
-        this.numberOfRooms = numberOfRooms;
+        this.phone = phone;
         this.rating = rating;
     }
 
-    public Hotel(Integer id, String name, String address, int numberOfRooms, double rating, City city) {
+    public Hotel(Integer id, String name, String address, String phone, double rating, City city) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.numberOfRooms = numberOfRooms;
+        this.phone = phone;
         this.rating = rating;
         this.city = city;
     }

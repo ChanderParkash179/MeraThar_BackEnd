@@ -1,7 +1,6 @@
 package com.mera.thar.back_app.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,12 +16,7 @@ import javax.persistence.*;
 public class TouristPoint {
 
     @Id
-    @SequenceGenerator(
-            name = "touristPoint_sequence",
-            sequenceName = "touristPoint_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "touristPoint_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tp_id")
     private Integer id;
     @Column(name = "tp_name")

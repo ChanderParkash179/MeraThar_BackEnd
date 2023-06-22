@@ -36,7 +36,7 @@ public class AppConstants {
     public static final String MSG_LOGIN_SUCCESSFUL_ADMIN = "ADMIN - Login Successful!";
 
     // TOURIST POINTS MESSAGE CONTAINER
-    public static final String MSG_INVALID_TOURIST_POINT_ID = "Invalid -or- Empty -or- Wrong Tourist Id";
+    public static final String MSG_INVALID_TOURIST_POINT_ID = "Invalid -or- Empty -or- Wrong Tourist Point Id";
     public static final String MSG_INVALID_TOURIST_POINT_NAME = "Invalid -or- Empty -or- Wrong Tourist Point Name";
 
     // CITY MESSAGE CONTAINER
@@ -46,7 +46,11 @@ public class AppConstants {
 
 
     // HOTEL MESSAGE CONTAINER
-    public static final String MSG_INVALID_HOTEL_ID = "Invalid -or- Empty -or- Wrong Tourist Id";
-    public static final String MSG_INVALID_HOTEL_NAME = "Invalid -or- Empty -or- Wrong Tourist Point Name";
+    public static final String MSG_INVALID_HOTEL_ID = "Invalid -or- Empty -or- Wrong Hotel Id";
+    public static final String MSG_INVALID_HOTEL_NAME = "Invalid -or- Empty -or- Wrong Hotel Name";
+
+    // RESTAURANTS MESSAGE CONTAINER
+    public static final String MSG_INVALID_RESTAURANT_ID = "Invalid -or- Empty -or- Wrong Restaurant Id";
+    public static final String MSG_INVALID_RESTAURANT_NAME = "Invalid -or- Empty -or- Wrong Restaurnat Name";
 
 }

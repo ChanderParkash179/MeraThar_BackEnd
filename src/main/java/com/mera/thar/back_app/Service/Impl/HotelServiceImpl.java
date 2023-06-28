@@ -29,13 +29,7 @@ public class HotelServiceImpl implements HotelService {
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
 
         try {
-            if (input == null) {
-                responseData.put("hotels", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 responseData.put("hotels", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_HOTEL_NAME);
@@ -79,13 +73,7 @@ public class HotelServiceImpl implements HotelService {
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
         Hotel hotel = null;
         try {
-            if (input == null) {
-                responseData.put("hotel", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (id == null || id == 0) {
+            if (id == null || id == 0) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_HOTEL_ID);
@@ -120,13 +108,7 @@ public class HotelServiceImpl implements HotelService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
 
         try {
-            if (input == null) {
-                responseData.put("hotel", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_HOTEL_NAME);
@@ -196,13 +178,7 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = null;
 
         try {
-            if (input == null) {
-                responseData.put("hotel", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else {
+            {
                 if (name == null || name.isEmpty()) {
                     responseData.put("hotel", null);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
@@ -273,13 +249,7 @@ public class HotelServiceImpl implements HotelService {
 
         Hotel hotel = null;
         try {
-            if (input == null) {
-                responseData.put("hotel", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -333,13 +303,7 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = null;
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         try {
-            if (input == null) {
-                responseData.put("hotel", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);

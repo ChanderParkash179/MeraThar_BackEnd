@@ -28,13 +28,7 @@ public class CityServiceImpl implements CityService {
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
         City city = null;
         try {
-            if (input == null) {
-                responseData.put("city", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (id == null || id == 0) {
+            if (id == null || id == 0) {
                 responseData.put("city", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_CITY_ID);
@@ -69,13 +63,7 @@ public class CityServiceImpl implements CityService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
 
         try {
-            if (input == null) {
-                responseData.put("city", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 responseData.put("city", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_CITY_NAME);
@@ -139,13 +127,7 @@ public class CityServiceImpl implements CityService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         City city = null;
         try {
-            if (input == null) {
-                responseData.put("city", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else {
+            {
                 if (name == null || name.isEmpty()) {
                     responseData.put("city", null);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
@@ -172,7 +154,6 @@ public class CityServiceImpl implements CityService {
                     response.setResponseData(responseData);
                     return response;
 
-
                 }
             }
 
@@ -191,13 +172,7 @@ public class CityServiceImpl implements CityService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         City city = null;
         try {
-            if (input == null) {
-                responseData.put("city", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("city", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -244,13 +219,7 @@ public class CityServiceImpl implements CityService {
         City city = null;
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         try {
-            if (input == null) {
-                responseData.put("city", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("city", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -260,7 +229,7 @@ public class CityServiceImpl implements CityService {
             }
 
             city = this.cityRepository.findById(id).get();
-            
+
             if (city.getId() == null) {
                 responseData.put("city", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);

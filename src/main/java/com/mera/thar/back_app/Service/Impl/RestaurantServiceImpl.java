@@ -27,15 +27,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
-
         try {
-            if (input == null) {
-                responseData.put("restaurants", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 responseData.put("restaurants", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_RESTAURANT_NAME);
@@ -79,13 +72,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
         Restaurant restaurant = null;
         try {
-            if (input == null) {
-                responseData.put("restaurant", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (id == null || id == 0) {
+            if (id == null || id == 0) {
                 responseData.put("restaurant", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_RESTAURANT_ID);
@@ -120,13 +107,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
 
         try {
-            if (input == null) {
-                responseData.put("restaurant", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else if (name == null || name.isEmpty()) {
+            if (name == null || name.isEmpty()) {
                 responseData.put("restaurant", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
                 response.setResponseMessage(AppConstants.MSG_INVALID_RESTAURANT_NAME);
@@ -196,13 +177,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = null;
 
         try {
-            if (input == null) {
-                responseData.put("restaurant", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            } else {
+            {
                 if (name == null || name.isEmpty()) {
                     responseData.put("restaurant", null);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
@@ -221,7 +196,9 @@ public class RestaurantServiceImpl implements RestaurantService {
                         return response;
                     } else {
 
-                        City getCity = this.cityRepository.findById(city).get() != null ? this.cityRepository.findById(city).get() : null;
+                        City getCity = this.cityRepository.findById(city).get() != null
+                                ? this.cityRepository.findById(city).get()
+                                : null;
 
                         if (getCity == null) {
                             responseData.put("restaurants", null);
@@ -271,13 +248,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         Restaurant restaurant = null;
         try {
-            if (input == null) {
-                responseData.put("restaurant", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("restaurant", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -331,13 +302,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = null;
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         try {
-            if (input == null) {
-                responseData.put("restaurant", null);
-                response.setResponseCode(AppConstants.NOT_FOUND);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
-                response.setResponseData(responseData);
-                return response;
-            }
+
             if (id == null || id == 0) {
                 responseData.put("restaurant", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);

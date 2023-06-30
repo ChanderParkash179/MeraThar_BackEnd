@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "tourist_point")
+@Table(name = "TOURIST_POINT")
 @Setter
 @Getter
 @ToString

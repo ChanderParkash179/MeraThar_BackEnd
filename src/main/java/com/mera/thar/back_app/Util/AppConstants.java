@@ -44,13 +44,20 @@ public class AppConstants {
     public static final String MSG_INVALID_CITY_NAME = "Invalid -or- Empty -or- Wrong City Name";
     public static final String MSG_NO_CITY_FOUND = "Requested City is not Available";
 
-
     // HOTEL MESSAGE CONTAINER
     public static final String MSG_INVALID_HOTEL_ID = "Invalid -or- Empty -or- Wrong Hotel Id";
     public static final String MSG_INVALID_HOTEL_NAME = "Invalid -or- Empty -or- Wrong Hotel Name";
 
     // RESTAURANTS MESSAGE CONTAINER
     public static final String MSG_INVALID_RESTAURANT_ID = "Invalid -or- Empty -or- Wrong Restaurant Id";
-    public static final String MSG_INVALID_RESTAURANT_NAME = "Invalid -or- Empty -or- Wrong Restaurnat Name";
+    public static final String MSG_INVALID_RESTAURANT_NAME = "Invalid -or- Empty -or- Wrong Restaurant Name";
+
+    // VEHICLE MESSAGE CONTAINER
+    public static final String MSG_INVALID_VEHICLE_ID = "Invalid -or- Empty -or- Wrong Vehicle Id";
+    public static final String MSG_INVALID_VEHICLE_NAME = "Invalid -or- Empty -or- Wrong Vehicle Name";
+
+    // DRIVER MESSAGE CONTAINER
+    public static final String MSG_INVALID_DRIVER_ID = "Invalid -or- Empty -or- Wrong Driver Id";
+    public static final String MSG_INVALID_DRIVER_NAME = "Invalid -or- Empty -or- Wrong Driver Name";
 
 }

@@ -27,9 +27,6 @@ public class Vehicle {
     @Column(name = "vehicle_ratings")
     private double rating;
 
-    @OneToOne(mappedBy = "vehicle")
-    private Driver driver;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name = "city_id")

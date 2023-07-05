@@ -9,9 +9,10 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
-    List<Vehicle> findAllByCityName(String cityName);
+    List<Vehicle> findAllByCityNameOrderByTypeAsc(String cityName);
     List<Vehicle> findAllByOrderByIdAsc();
     Vehicle findByName(String name);
+    List<Vehicle> findAllByName(String name);
 
 
 }

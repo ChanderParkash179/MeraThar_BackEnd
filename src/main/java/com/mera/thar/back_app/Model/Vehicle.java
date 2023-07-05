@@ -26,6 +26,10 @@ public class Vehicle {
     private String phone;
     @Column(name = "vehicle_ratings")
     private double rating;
+    @Column(name = "vehicle_type")
+    private String type;
+    @Column(name = "vehicle_transport")
+    private String transport;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -35,35 +39,43 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String name, String price, String phone, double rating, City city) {
+    public Vehicle(String name, String price, String phone, String transport, double rating, String type, City city) {
         this.name = name;
         this.price = price;
         this.phone = phone;
+        this.transport = transport;
         this.rating = rating;
+        this.type = type;
         this.city = city;
     }
 
-    public Vehicle(Integer id, String name, String price, String phone, double rating) {
+    public Vehicle(String name, String price, String phone, String transport, double rating, String type) {
+        this.name = name;
+        this.price = price;
+        this.transport = transport;
+        this.phone = phone;
+        this.rating = rating;
+        this.type = type;
+    }
+
+    public Vehicle(Integer id, String name, String price, String transport, String phone, double rating, String type) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.transport = transport;
+        this.phone = phone;
+        this.rating = rating;
+        this.type = type;
+    }
+
+    public Vehicle(Integer id, String name, String transport, String price, String phone, double rating, String type, City city) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.phone = phone;
+        this.transport = transport;
         this.rating = rating;
-    }
-
-    public Vehicle(String name, String price, String phone, double rating) {
-        this.name = name;
-        this.price = price;
-        this.phone = phone;
-        this.rating = rating;
-    }
-
-    public Vehicle(Integer id, String name, String price, String phone, double rating, City city) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.phone = phone;
-        this.rating = rating;
+        this.type = type;
         this.city = city;
     }
 }

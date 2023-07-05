@@ -45,7 +45,7 @@ public class VehicleServiceImpl implements VehicleService {
                 response.setResponseData(responseData);
                 return response;
             } else {
-                List<Vehicle> vehicles = this.vehicleRepository.findAllByCityName(name);
+                List<Vehicle> vehicles = this.vehicleRepository.findAllByCityNameOrderByTypeAsc(name);
                 if (vehicles == null) {
                     responseData.put("vehicles", null);
                     response.setResponseCode(AppConstants.NOT_FOUND);
@@ -115,7 +115,7 @@ public class VehicleServiceImpl implements VehicleService {
                 response.setResponseData(responseData);
                 return response;
             }
-            Vehicle vehicle = this.vehicleRepository.findByName(name);
+            List<Vehicle> vehicle = this.vehicleRepository.findAllByName(name);
             if (vehicle == null) {
                 responseData.put("vehicle", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -171,6 +171,7 @@ public class VehicleServiceImpl implements VehicleService {
 
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         String price = (String) input.get("price") != null ? (String) input.get("price") : null;
+        String type = (String) input.get("type") != null ? (String) input.get("type") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
         Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
@@ -212,9 +213,16 @@ public class VehicleServiceImpl implements VehicleService {
 
                             vehicle.setName(name);
                             vehicle.setPrice(price);
+                            vehicle.setType(type);
                             vehicle.setRating(rating);
                             vehicle.setPhone(phone);
                             vehicle.setCity(getCity);
+
+                            if (vehicle.getType().equals(("BUSS").toLowerCase()) || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                                vehicle.setTransport("PUBLIC");
+                            } else {
+                                vehicle.setTransport("PRIVATE");
+                            }
 
                             this.vehicleRepository.save(vehicle);
 
@@ -241,6 +249,7 @@ public class VehicleServiceImpl implements VehicleService {
 
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String type = (String) input.get("type") != null ? (String) input.get("type") : null;
         String price = (String) input.get("price") != null ? (String) input.get("price") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
@@ -281,6 +290,13 @@ public class VehicleServiceImpl implements VehicleService {
                 vehicle.setRating(rating);
                 vehicle.setPhone(phone);
                 vehicle.setCity(getCity);
+                vehicle.setType(type);
+
+                if (vehicle.getType().equals(("BUSS").toLowerCase()) || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                    vehicle.setTransport("PUBLIC");
+                } else {
+                    vehicle.setTransport("PRIVATE");
+                }
 
                 this.vehicleRepository.save(vehicle);
                 responseData.put("vehicle", vehicle);

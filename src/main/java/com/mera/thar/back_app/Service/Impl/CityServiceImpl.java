@@ -18,13 +18,11 @@ import java.util.Map;
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
-    Map<String, Object> responseData = null;
-    Response response = null;
 
     @Override
     public Response getById(Map<String, Object> input) {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
         City city = null;
         try {
@@ -58,8 +56,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
 
         try {
@@ -93,8 +91,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response getAll() {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
 
         try {
             List<City> cities = this.cityRepository.findAllByOrderByIdAsc();
@@ -121,8 +119,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response save(Map<String, Object> input) {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
 
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         City city = null;
@@ -166,8 +164,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response update(Map<String, Object> input) {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         City city = null;
@@ -214,8 +212,8 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response delete(Map<String, Object> input) {
-        responseData = new HashMap<>();
-        response = new Response();
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
         City city = null;
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
         try {

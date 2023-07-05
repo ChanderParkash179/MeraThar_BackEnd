@@ -30,7 +30,6 @@ public class AppConstants {
 
     // LOGIN MESSAGE CONTAINER
 
-    public static final String MSG_NO_USER_EXIST = "No User Exist!";
     public static final String MSG_INVALID_CREDENTIALS = "Invalid -or- Empty Credentials";
     public static final String MSG_LOGIN_SUCCESSFUL_TOURIST = "TOURIST - Login Successful!";
     public static final String MSG_LOGIN_SUCCESSFUL_ADMIN = "ADMIN - Login Successful!";
@@ -59,5 +58,12 @@ public class AppConstants {
     // DRIVER MESSAGE CONTAINER
     public static final String MSG_INVALID_DRIVER_ID = "Invalid -or- Empty -or- Wrong Driver Id";
     public static final String MSG_INVALID_DRIVER_NAME = "Invalid -or- Empty -or- Wrong Driver Name";
+
+    // USER MESSAGE CONTAINER
+    public static final String MSG_USER_ALREADY_EXIST = "Requested User is Already Available";
+    public static final String MSG_NO_USER_EXIST = "Requested User is Not Available";
+    public static final String MSG_USER_PASSWORD_INCORRECT = "Requested User's Password is Incorrect";
+    public static final String MSG_USER_CREATED_SUCCESSFULLY = "Requested User is Registered Successfully";
+    public static final String MSG_USER_PARAMETERS_UNAVAILABLE = "Some Requested Parameters are  Unavailable";
 
 }

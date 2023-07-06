@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RequestMapping("api/city/hotel/")
+@RequestMapping("api/mera_thar/city/hotel/")
 @RestController
 @RequiredArgsConstructor
 public class HotelController {

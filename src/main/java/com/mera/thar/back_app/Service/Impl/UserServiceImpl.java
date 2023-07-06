@@ -6,7 +6,6 @@ import com.mera.thar.back_app.Repository.UserRepository;
 import com.mera.thar.back_app.Service.UserService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -84,9 +83,8 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
 
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
-        String password = (String) input.get("email") != null ? (String) input.get("email") : null;
+        String password = (String) input.get("password") != null ? (String) input.get("password") : null;
 
-        User user = null;
         try {
 
             if (input == null) {
@@ -102,7 +100,7 @@ public class UserServiceImpl implements UserService {
                 response.setResponseData(responseData);
                 return response;
             } else {
-                user = this.userRepository.findByEmail(email);
+                User user = this.userRepository.findByEmail(email);
 
                 if (user == null) {
                     responseData.put("user", null);
@@ -114,20 +112,20 @@ public class UserServiceImpl implements UserService {
                         responseData.put("user", user);
                         response.setResponseCode(AppConstants.FOUND);
                         response.setResponseMessage(AppConstants.MSG_USER_ALREADY_EXIST);
+                        response.setResponseData(responseData);
+                        return response;
                     } else {
                         responseData.put("user", null);
                         response.setResponseCode(AppConstants.NOT_FOUND);
                         response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_INCORRECT);
+                        response.setResponseData(responseData);
+                        return response;
                     }
                 }
-                response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
         return response;
-
     }
 }

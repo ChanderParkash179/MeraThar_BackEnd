@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-@RequestMapping("api/city/")
+@RequestMapping("api/mera_thar/city/")
 @RestController
 @RequiredArgsConstructor
 public class CityController {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RequestMapping("api/city/vehicle/")
+@RequestMapping("api/mera_thar/city/vehicle/")
 @RestController
 @RequiredArgsConstructor
 public class VehicleController {

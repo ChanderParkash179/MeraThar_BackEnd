@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@RequestMapping("api/user/")
+@RequestMapping("api/mera_thar/user/")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("signin")
+    @PostMapping("login")
     private ResponseEntity<?> login(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.userService.userSignIn(request), HttpStatus.OK);
@@ -27,7 +27,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("signup")
+    @PostMapping("register")
     private ResponseEntity<?> register(@RequestBody Map<String, Object> request) {
         try {
             return new ResponseEntity<>(this.userService.userSignUp(request), HttpStatus.CREATED);

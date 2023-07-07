@@ -7,7 +7,6 @@ import com.mera.thar.back_app.Repository.UserRepository;
 import com.mera.thar.back_app.Service.UserService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,23 +29,29 @@ public class UserServiceImpl implements UserService {
         String lastName = (String) input.get("lastName") != null ? (String) input.get("lastName") : null;
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
         String password = (String) input.get("password") != null ? (String) input.get("password") : null;
-        try {
 
+        try {
             if (input == null) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
                 response.setResponseData(responseData);
                 return response;
             } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty()) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
+                response.setResponseData(responseData);
+                return response;
+            } else if (!SystemUtils.validateEmail(email)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_EMAIL_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_EMAIL_POLICY);
                 response.setResponseData(responseData);
                 return response;
             } else if (!SystemUtils.validatePassword(password)) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseCode(AppConstants.USER_PASSWORD_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_POLICY);
                 response.setResponseData(responseData);
                 return response;
@@ -55,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
                 if (user != null) {
                     responseData.put("user", user);
-                    response.setResponseCode(AppConstants.FOUND);
+                    response.setResponseCode(AppConstants.USER_ALREADY_EXISTS);
                     response.setResponseMessage(AppConstants.MSG_USER_ALREADY_EXIST);
                     response.setResponseData(responseData);
                     return response;
@@ -71,13 +76,17 @@ public class UserServiceImpl implements UserService {
                     this.userRepository.save(user);
 
                     responseData.put("user", user);
-                    response.setResponseCode(AppConstants.CREATED);
-                    response.setResponseMessage(AppConstants.MSG_USER_CREATED_SUCCESSFULLY);
+                    response.setResponseCode(AppConstants.USER_CREATED);
+                    response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_SUCCESSFULLY);
                     response.setResponseData(responseData);
                     return response;
                 }
             }
         } catch (Exception ex) {
+            responseData.put("user", null);
+            response.setResponseCode(AppConstants.USER_SIGNUP_FAILED);
+            response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_FAILED);
+            response.setResponseData(responseData);
             ex.printStackTrace();
         }
 
@@ -97,19 +106,25 @@ public class UserServiceImpl implements UserService {
         try {
             if (input == null) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
-                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
                 response.setResponseData(responseData);
                 return response;
             } else if (email.isEmpty() && password.isEmpty()) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
+                response.setResponseData(responseData);
+                return response;
+            } else if (!SystemUtils.validateEmail(email)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_EMAIL_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_EMAIL_POLICY);
                 response.setResponseData(responseData);
                 return response;
             } else if (!SystemUtils.validatePassword(password)) {
                 responseData.put("user", null);
-                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseCode(AppConstants.USER_PASSWORD_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_POLICY);
                 response.setResponseData(responseData);
                 return response;
@@ -118,7 +133,7 @@ public class UserServiceImpl implements UserService {
 
                 if (user == null) {
                     responseData.put("user", null);
-                    response.setResponseCode(AppConstants.BAD_REQUEST);
+                    response.setResponseCode(AppConstants.USER_NOT_FOUND);
                     response.setResponseMessage(AppConstants.MSG_NO_USER_EXIST);
                     response.setResponseData(responseData);
                     return response;
@@ -127,13 +142,13 @@ public class UserServiceImpl implements UserService {
                     boolean matchPassword = passwordEncoder.matches(password, user.getPassword());
                     if (matchPassword) {
                         responseData.put("user", user);
-                        response.setResponseCode(AppConstants.ACCEPTED);
+                        response.setResponseCode(AppConstants.USER_LOGIN);
                         response.setResponseMessage(AppConstants.MSG_USER_LOGIN_SUCCESSFULLY);
                         response.setResponseData(responseData);
                         return response;
                     } else {
                         responseData.put("user", null);
-                        response.setResponseCode(AppConstants.NOT_FOUND);
+                        response.setResponseCode(AppConstants.USER_PASSWORD_INVALID);
                         response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_INCORRECT);
                         response.setResponseData(responseData);
                         return response;
@@ -141,10 +156,12 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (Exception ex) {
+            responseData.put("user", null);
+            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
+            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
+            response.setResponseData(responseData);
             ex.printStackTrace();
         }
         return response;
     }
-
-
 }

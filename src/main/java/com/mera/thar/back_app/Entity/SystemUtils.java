@@ -11,4 +11,15 @@ public class SystemUtils {
             return false;
         }
     }
+
+    public static boolean validateEmail(String email) {
+        if (email.isEmpty()) {
+            return false;
+        } else {
+            boolean extraSpace = email.length() == email.trim().length();
+            String simpleRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+            boolean simpleValidation = email.matches(simpleRegex);
+            return extraSpace && simpleValidation ? true : false;
+        }
+    }
 }

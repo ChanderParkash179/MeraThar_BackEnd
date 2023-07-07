@@ -13,6 +13,18 @@ public class AppConstants {
     public static final String NOT_FOUND = "ERROR_404";
     public static final String INTERNAL_SERVER_ERROR = "ERROR_500";
 
+    // LOGIN CODES
+    public static final String USER_LOGIN = "SUCCESS_200";
+    public static final String USER_CREATED = "SUCCESS_201";
+    public static final String USER_ALREADY_EXISTS = "ERROR_203";
+    public static final String USER_INPUT_EMPTY = "ERROR_204";
+    public static final String USER_SIGNUP_FAILED = "ERROR_400";
+    public static final String USER_LOGIN_FAILED = "ERROR_401";
+    public static final String USER_NOT_FOUND = "ERROR_404";
+    public static final String USER_EMAIL_INVALID = "ERROR_405";
+    public static final String USER_PASSWORD_INVALID = "ERROR_406";
+    public static final String USER_PARAMETERS_INVALID = "ERROR_407";
+
     // APP MESSAGES
     public static final String MSG_RESOURCE_DELETED = "Requested resource Deleted Successfully!";
     public static final String MSG_RESOURCE_FOUND = "Requested Resources Found Successfully";
@@ -27,12 +39,6 @@ public class AppConstants {
     public static final String MSG_DATA_SAVED = "Requested Data Saved Successfully!";
     public static final String MSG_DELETED = "Requested Data Deleted Successfully!";
     public static final String MSG_RESOURCE_UPDATED = "Requested Resource Updated Successfully!";
-
-    // LOGIN MESSAGE CONTAINER
-
-    public static final String MSG_INVALID_CREDENTIALS = "Invalid -or- Empty Credentials";
-    public static final String MSG_LOGIN_SUCCESSFUL_TOURIST = "TOURIST - Login Successful!";
-    public static final String MSG_LOGIN_SUCCESSFUL_ADMIN = "ADMIN - Login Successful!";
 
     // TOURIST POINTS MESSAGE CONTAINER
     public static final String MSG_INVALID_TOURIST_POINT_ID = "Invalid -or- Empty -or- Wrong Tourist Point Id";
@@ -62,11 +68,14 @@ public class AppConstants {
     // USER MESSAGE CONTAINER
     public static final String MSG_USER_ALREADY_EXIST = "Requested User is Already Available";
     public static final String MSG_USER_LOGIN_SUCCESSFULLY = "Requested User is Login Successfully";
+    public static final String MSG_USER_LOGIN_FAILED = "Requested User is Login Failed Due to Some Issue";
     public static final String MSG_NO_USER_EXIST = "Requested User is Not Available";
     public static final String MSG_USER_PASSWORD_INCORRECT = "Requested User's Password is Incorrect";
-    public static final String MSG_USER_CREATED_SUCCESSFULLY = "Requested User is Registered Successfully";
-    public static final String MSG_USER_EMAIL_PASSWORD_BE_DIFFERENT = "Requested User's Email and Password Should be Different";
-    public static final String MSG_USER_PARAMETERS_UNAVAILABLE = "Some Requested Parameters are  Unavailable";
-    public static final String MSG_USER_PASSWORD_POLICY = "Provided password doesn't meet the policy";
+    public static final String MSG_USER_SIGNUP_SUCCESSFULLY = "Requested User is Registered Successfully";
+    public static final String MSG_USER_SIGNUP_FAILED = "Requested User is Registered Failed Due to Some Issue";
+    public static final String MSG_USER_PARAMETERS_UNAVAILABLE = "Some Requested Parameters are Unavailable";
+    public static final String MSG_USER_PARAMETERS_INVALID = "Input Fields are Empty or Invalid";
+    public static final String MSG_USER_EMAIL_POLICY = "Provided Email doesn't meet the policy";
+    public static final String MSG_USER_PASSWORD_POLICY = "Provided Password doesn't meet the policy";
 
 }

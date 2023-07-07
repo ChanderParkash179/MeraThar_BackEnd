@@ -1,11 +1,13 @@
 package com.mera.thar.back_app.Service.Impl;
 
 import com.mera.thar.back_app.Entity.Response;
+import com.mera.thar.back_app.Entity.SystemUtils;
 import com.mera.thar.back_app.Model.User;
 import com.mera.thar.back_app.Repository.UserRepository;
 import com.mera.thar.back_app.Service.UserService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,7 @@ public class UserServiceImpl implements UserService {
         String firstName = (String) input.get("firstName") != null ? (String) input.get("firstName") : null;
         String lastName = (String) input.get("lastName") != null ? (String) input.get("lastName") : null;
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
-        String password = (String) input.get("email") != null ? (String) input.get("email") : null;
-
+        String password = (String) input.get("password") != null ? (String) input.get("password") : null;
         try {
 
             if (input == null) {
@@ -43,8 +44,14 @@ public class UserServiceImpl implements UserService {
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
                 response.setResponseData(responseData);
                 return response;
+            } else if (!SystemUtils.validatePassword(password)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_POLICY);
+                response.setResponseData(responseData);
+                return response;
             } else {
-                User user = this.userRepository.findByEmail(email);//!= null ? this.userRepository.findByEmail(email) : null;
+                User user = this.userRepository.findByEmail(email);
 
                 if (user != null) {
                     responseData.put("user", user);
@@ -85,8 +92,9 @@ public class UserServiceImpl implements UserService {
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
         String password = (String) input.get("password") != null ? (String) input.get("password") : null;
 
-        try {
+        password = password.toString().trim();
 
+        try {
             if (input == null) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.BAD_REQUEST);
@@ -99,6 +107,12 @@ public class UserServiceImpl implements UserService {
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
                 response.setResponseData(responseData);
                 return response;
+            } else if (!SystemUtils.validatePassword(password)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_POLICY);
+                response.setResponseData(responseData);
+                return response;
             } else {
                 User user = this.userRepository.findByEmail(email);
 
@@ -106,12 +120,15 @@ public class UserServiceImpl implements UserService {
                     responseData.put("user", null);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
                     response.setResponseMessage(AppConstants.MSG_NO_USER_EXIST);
+                    response.setResponseData(responseData);
+                    return response;
                 } else {
+
                     boolean matchPassword = passwordEncoder.matches(password, user.getPassword());
                     if (matchPassword) {
                         responseData.put("user", user);
-                        response.setResponseCode(AppConstants.FOUND);
-                        response.setResponseMessage(AppConstants.MSG_USER_ALREADY_EXIST);
+                        response.setResponseCode(AppConstants.ACCEPTED);
+                        response.setResponseMessage(AppConstants.MSG_USER_LOGIN_SUCCESSFULLY);
                         response.setResponseData(responseData);
                         return response;
                     } else {
@@ -128,4 +145,6 @@ public class UserServiceImpl implements UserService {
         }
         return response;
     }
+
+
 }

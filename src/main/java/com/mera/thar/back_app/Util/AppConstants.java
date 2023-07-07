@@ -61,9 +61,12 @@ public class AppConstants {
 
     // USER MESSAGE CONTAINER
     public static final String MSG_USER_ALREADY_EXIST = "Requested User is Already Available";
+    public static final String MSG_USER_LOGIN_SUCCESSFULLY = "Requested User is Login Successfully";
     public static final String MSG_NO_USER_EXIST = "Requested User is Not Available";
     public static final String MSG_USER_PASSWORD_INCORRECT = "Requested User's Password is Incorrect";
     public static final String MSG_USER_CREATED_SUCCESSFULLY = "Requested User is Registered Successfully";
+    public static final String MSG_USER_EMAIL_PASSWORD_BE_DIFFERENT = "Requested User's Email and Password Should be Different";
     public static final String MSG_USER_PARAMETERS_UNAVAILABLE = "Some Requested Parameters are  Unavailable";
+    public static final String MSG_USER_PASSWORD_POLICY = "Provided password doesn't meet the policy";
 
 }

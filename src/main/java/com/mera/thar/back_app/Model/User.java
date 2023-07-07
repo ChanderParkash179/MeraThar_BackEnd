@@ -9,9 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-@Setter
-@Getter
-@ToString
 public class User {
 
     @Id
@@ -24,16 +21,10 @@ public class User {
     private String lastName;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @Column(name = "password")
-    @JsonIgnore
+    @Column(name = "password", nullable = false, unique = true)
     private String password;
 
     public User() {
-    }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
     }
 
     public User(Integer id, String firstName, String lastName) {
@@ -42,9 +33,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -55,5 +44,56 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

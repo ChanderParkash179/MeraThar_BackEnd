@@ -21,16 +21,25 @@ public class User {
     private String lastName;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password")
     private String password;
+    @Column(name = "social")
+    private String social;
 
     public User() {
     }
 
-    public User(Integer id, String firstName, String lastName) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, String social) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
+        this.social = social;
+    }
+
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public User(String email, String password) {
@@ -38,12 +47,29 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, String social) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.social = social;
+    }
+
+    public User(Integer id, String firstName, String lastName, String email, String password, String social) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.social = social;
+    }
+
+    public String getSocial() {
+        return social;
+    }
+
+    public void setSocial(String social) {
+        this.social = social;
     }
 
     public Integer getId() {

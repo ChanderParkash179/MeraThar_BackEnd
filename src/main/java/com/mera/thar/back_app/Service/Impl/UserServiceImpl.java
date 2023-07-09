@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
                     user.setFirstName(firstName);
                     user.setLastName(lastName);
                     user.setEmail(email);
+                    user.setSocial(AppConstants.APPLICATION);
                     user.setPassword(encodedPassword);
 
                     this.userRepository.save(user);

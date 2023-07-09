@@ -12,6 +12,7 @@ public class AppConstants {
     public static final String FORBIDDEN = "ERROR_403";
     public static final String NOT_FOUND = "ERROR_404";
     public static final String INTERNAL_SERVER_ERROR = "ERROR_500";
+    public static final String APPLICATION = "APPLICATION";
 
     // LOGIN CODES
     public static final String USER_LOGIN = "SUCCESS_200";

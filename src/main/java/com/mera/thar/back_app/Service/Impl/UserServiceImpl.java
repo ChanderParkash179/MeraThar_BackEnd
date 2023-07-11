@@ -1,6 +1,8 @@
 package com.mera.thar.back_app.Service.Impl;
 
+import com.mera.thar.back_app.Entity.Gender;
 import com.mera.thar.back_app.Entity.Response;
+import com.mera.thar.back_app.Entity.Social;
 import com.mera.thar.back_app.Entity.SystemUtils;
 import com.mera.thar.back_app.Model.User;
 import com.mera.thar.back_app.Repository.UserRepository;
@@ -29,7 +31,10 @@ public class UserServiceImpl implements UserService {
         String lastName = (String) input.get("lastName") != null ? (String) input.get("lastName") : null;
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
         String password = (String) input.get("password") != null ? (String) input.get("password") : null;
+        String gender = (String) input.get("gender") != null ? (String) input.get("gender") : null;
 
+        email = email.toLowerCase();
+        password = password.toString().trim();
         try {
             if (input == null) {
                 responseData.put("user", null);
@@ -37,7 +42,7 @@ public class UserServiceImpl implements UserService {
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
                 response.setResponseData(responseData);
                 return response;
-            } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty()) {
+            } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty() && gender.toString().isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
@@ -67,11 +72,14 @@ public class UserServiceImpl implements UserService {
                 } else {
                     String encodedPassword = passwordEncoder.encode(password);
 
+                    Gender genderOfUser = Gender.valueOf(gender);
+
                     user = new User();
                     user.setFirstName(firstName);
                     user.setLastName(lastName);
                     user.setEmail(email);
-                    user.setSocial(AppConstants.APPLICATION);
+                    user.setSocial(Social.APPLICATION);
+                    user.setGender(genderOfUser);
                     user.setPassword(encodedPassword);
 
                     this.userRepository.save(user);
@@ -101,7 +109,7 @@ public class UserServiceImpl implements UserService {
 
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
         String password = (String) input.get("password") != null ? (String) input.get("password") : null;
-
+        email = email.toLowerCase();
         password = password.toString().trim();
 
         try {

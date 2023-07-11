@@ -1,6 +1,7 @@
 package com.mera.thar.back_app.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mera.thar.back_app.Entity.Gender;
+import com.mera.thar.back_app.Entity.Social;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
+@Getter
+@Setter
+@ToString
 public class User {
 
     @Id
@@ -23,13 +27,17 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
+    @Enumerated(EnumType.STRING)
     @Column(name = "social")
-    private String social;
+    private Social social;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String social) {
+    public User(String firstName, String lastName, String email, Social social) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -47,7 +55,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String firstName, String lastName, String email, String password, String social) {
+    public User(String firstName, String lastName, String email, String password, Social social) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -55,7 +63,7 @@ public class User {
         this.social = social;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String password, String social) {
+    public User(Integer id, String firstName, String lastName, String email, String password, Social social) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,62 +72,30 @@ public class User {
         this.social = social;
     }
 
-    public String getSocial() {
-        return social;
-    }
-
-    public void setSocial(String social) {
+    public User(Integer id, String firstName, String lastName, String email, String password, Gender gender, Social social) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
         this.social = social;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public User(String firstName, String lastName, String email, String password, Gender gender, Social social) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+        this.gender = gender;
+        this.social = social;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public User(String firstName, String lastName, String email, String password, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
     }
 }

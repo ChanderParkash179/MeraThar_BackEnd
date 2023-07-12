@@ -36,4 +36,13 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("email")
+    private ResponseEntity<?> findByEmail(@RequestBody Map<String, Object> request) {
+        try {
+            return new ResponseEntity<>(this.userService.findByEmail(request), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

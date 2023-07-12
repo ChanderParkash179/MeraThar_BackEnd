@@ -16,6 +16,7 @@ public class AppConstants {
     // LOGIN CODES
     public static final String USER_LOGIN = "SUCCESS_200";
     public static final String USER_CREATED = "SUCCESS_201";
+    public static final String USER_FOUND = "SUCCESS_202";
     public static final String USER_ALREADY_EXISTS = "ERROR_203";
     public static final String USER_INPUT_EMPTY = "ERROR_204";
     public static final String USER_SIGNUP_FAILED = "ERROR_400";
@@ -77,5 +78,6 @@ public class AppConstants {
     public static final String MSG_USER_PARAMETERS_INVALID = "Input Fields are Empty or Invalid";
     public static final String MSG_USER_EMAIL_POLICY = "Provided Email doesn't meet the policy";
     public static final String MSG_USER_PASSWORD_POLICY = "Provided Password doesn't meet the policy";
+    public static final String MSG_USER_FOUND_SUCCESSFULLY = "Requested User Found Successfully!";
 
 }

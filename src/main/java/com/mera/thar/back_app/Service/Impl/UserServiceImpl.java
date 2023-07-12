@@ -173,4 +173,57 @@ public class UserServiceImpl implements UserService {
         }
         return response;
     }
+
+    @Override
+    public Response findByEmail(Map<String, Object> input) {
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
+
+        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
+
+        try {
+            if (input == null) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
+                response.setResponseData(responseData);
+                return response;
+            } else if (email.isEmpty()) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
+                response.setResponseData(responseData);
+                return response;
+            } else if (!SystemUtils.validateEmail(email)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_EMAIL_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_EMAIL_POLICY);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+                User user = this.userRepository.findByEmail(email);
+
+                if (user == null) {
+                    responseData.put("user", null);
+                    response.setResponseCode(AppConstants.USER_NOT_FOUND);
+                    response.setResponseMessage(AppConstants.MSG_NO_USER_EXIST);
+                    response.setResponseData(responseData);
+                    return response;
+                } else {
+                    responseData.put("user", user);
+                    response.setResponseCode(AppConstants.USER_FOUND);
+                    response.setResponseMessage(AppConstants.MSG_USER_FOUND_SUCCESSFULLY);
+                    response.setResponseData(responseData);
+                    return response;
+                }
+            }
+        } catch (Exception ex) {
+            responseData.put("user", null);
+            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
+            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
+            response.setResponseData(responseData);
+            ex.printStackTrace();
+        }
+        return response;
+    }
 }

@@ -11,4 +11,6 @@ public interface UserService {
 
     Response userSignIn(Map<String, Object> input);
 
+    Response findByEmail(Map<String, Object> input);
+
 }

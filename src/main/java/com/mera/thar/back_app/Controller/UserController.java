@@ -1,6 +1,5 @@
 package com.mera.thar.back_app.Controller;
 
-import com.mera.thar.back_app.Model.User;
 import com.mera.thar.back_app.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

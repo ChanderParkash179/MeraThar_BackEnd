@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         email = email.toLowerCase();
         password = password.toString().trim();
         try {
-            if (input == null) {
+            if (input.isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
         password = password.toString().trim();
 
         try {
-            if (input == null) {
+            if (input.isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
         String email = (String) input.get("email") != null ? (String) input.get("email") : null;
 
         try {
-            if (input == null) {
+            if (input.isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);

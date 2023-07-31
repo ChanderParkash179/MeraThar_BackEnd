@@ -19,8 +19,10 @@ public class AppConstants {
     public static final String USER_FOUND = "SUCCESS_202";
     public static final String USER_ALREADY_EXISTS = "ERROR_203";
     public static final String USER_INPUT_EMPTY = "ERROR_204";
+    public static final String USER_DELETED = "SUCCESS_205";
     public static final String USER_SIGNUP_FAILED = "ERROR_400";
     public static final String USER_LOGIN_FAILED = "ERROR_401";
+    public static final String USER_DELETED_FAILED = "ERROR_402";
     public static final String USER_NOT_FOUND = "ERROR_404";
     public static final String USER_EMAIL_INVALID = "ERROR_405";
     public static final String USER_PASSWORD_INVALID = "ERROR_406";
@@ -79,5 +81,7 @@ public class AppConstants {
     public static final String MSG_USER_EMAIL_POLICY = "Provided Email doesn't meet the policy";
     public static final String MSG_USER_PASSWORD_POLICY = "Provided Password doesn't meet the policy";
     public static final String MSG_USER_FOUND_SUCCESSFULLY = "Requested User Found Successfully!";
+    public static final String MSG_USER_DELETED_SUCCESSFULLY = "Requested User Deleted Successfully!";
+    public static final String MSG_USER_DELETED_FAILED = "Requested User failed to Delete!";
 
 }

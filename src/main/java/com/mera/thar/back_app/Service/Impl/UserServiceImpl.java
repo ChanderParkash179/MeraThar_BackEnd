@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
                 response.setResponseData(responseData);
                 return response;
-            } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty() && gender.toString().isEmpty()) {
+            } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty()
+                    && gender.toString().isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
                 response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
@@ -213,6 +214,60 @@ public class UserServiceImpl implements UserService {
                     responseData.put("user", user);
                     response.setResponseCode(AppConstants.USER_FOUND);
                     response.setResponseMessage(AppConstants.MSG_USER_FOUND_SUCCESSFULLY);
+                    response.setResponseData(responseData);
+                    return response;
+                }
+            }
+        } catch (Exception ex) {
+            responseData.put("user", null);
+            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
+            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
+            response.setResponseData(responseData);
+            ex.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public Response deleteByEmail(Map<String, Object> input) {
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
+
+        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
+
+        try {
+            if (input.isEmpty()) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
+                response.setResponseData(responseData);
+                return response;
+            } else if (email.isEmpty()) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+                User user = this.userRepository.findByEmail(email);
+                if (user == null) {
+                    responseData.put("user", user);
+                    response.setResponseCode(AppConstants.USER_DELETED_FAILED);
+                    response.setResponseMessage(AppConstants.MSG_USER_DELETED_FAILED);
+                    response.setResponseData(responseData);
+                    return response;
+                } else {
+                    this.userRepository.deleteByEmail(email);
+                    Map<String, Object> deletedUser = new HashMap<>();
+
+                    deletedUser.put("firstName", user.getFirstName());
+                    deletedUser.put("lastName", user.getLastName());
+                    deletedUser.put("email", user.getEmail());
+                    deletedUser.put("gender", user.getGender());
+
+                    responseData.put("user", deletedUser);
+                    response.setResponseCode(AppConstants.USER_DELETED);
+                    response.setResponseMessage(AppConstants.MSG_USER_DELETED_SUCCESSFULLY);
                     response.setResponseData(responseData);
                     return response;
                 }

@@ -13,4 +13,5 @@ public interface UserService {
 
     Response findByEmail(Map<String, Object> input);
 
+    Response deleteByEmail(Map<String,Object> input);
 }

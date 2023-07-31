@@ -9,6 +9,9 @@ import com.mera.thar.back_app.Repository.RestaurantRepository;
 import com.mera.thar.back_app.Service.RestaurantService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,11 +22,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
 
+    private static final Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
+
     private final RestaurantRepository restaurantRepository;
     private final CityRepository cityRepository;
 
     @Override
     public Response getAllRestaurantsByCityName(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.getAllRestaurantsByCityName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
@@ -67,6 +75,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response getById(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.getById() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
@@ -102,6 +113,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.getByName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
@@ -137,6 +151,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response getAll() {
+
+        logger.info("in RestaurantServiceImpl.getAll() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -165,6 +182,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response save(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.save() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -235,6 +255,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response update(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.update() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -297,6 +320,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Response delete(Map<String, Object> input) {
+
+        logger.info("in RestaurantServiceImpl.delete() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Restaurant restaurant = null;

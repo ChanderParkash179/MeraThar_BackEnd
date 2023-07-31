@@ -9,6 +9,9 @@ import com.mera.thar.back_app.Repository.UserRepository;
 import com.mera.thar.back_app.Service.UserService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +22,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Response userSignUp(Map<String, Object> input) {
+
+        logger.info("in UserServiceImpl.userSignUp() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -105,6 +113,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response userSignIn(Map<String, Object> input) {
+
+        logger.info("in UserServiceImpl.userSignIn() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -177,6 +188,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response findByEmail(Map<String, Object> input) {
+
+        logger.info("in UserServiceImpl.findByEmail() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -230,6 +244,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Response deleteByEmail(Map<String, Object> input) {
+
+        logger.info("in UserServiceImpl.deleteByEmail() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 

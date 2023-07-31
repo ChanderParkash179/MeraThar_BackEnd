@@ -9,6 +9,9 @@ import com.mera.thar.back_app.Repository.VehicleRepository;
 import com.mera.thar.back_app.Service.VehicleService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,11 +22,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
 
+    private static final Logger logger = LoggerFactory.getLogger(VehicleServiceImpl.class);
+
     private final VehicleRepository vehicleRepository;
     private final CityRepository cityRepository;
 
     @Override
     public Response getAllVehiclesByCityName(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.getAllVehiclesByCityName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
@@ -68,6 +76,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response getById(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.getById() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
@@ -103,6 +114,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.getByName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
@@ -138,6 +152,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response getAll() {
+
+        logger.info("in VehicleServiceImpl.getAll() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -166,6 +183,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response save(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.save() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -218,7 +238,8 @@ public class VehicleServiceImpl implements VehicleService {
                             vehicle.setPhone(phone);
                             vehicle.setCity(getCity);
 
-                            if (vehicle.getType().equals(("BUSS").toLowerCase()) || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                            if (vehicle.getType().equals(("BUSS").toLowerCase())
+                                    || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
                                 vehicle.setTransport("PUBLIC");
                             } else {
                                 vehicle.setTransport("PRIVATE");
@@ -244,6 +265,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response update(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.update() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -292,7 +316,8 @@ public class VehicleServiceImpl implements VehicleService {
                 vehicle.setCity(getCity);
                 vehicle.setType(type);
 
-                if (vehicle.getType().equals(("BUSS").toLowerCase()) || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                if (vehicle.getType().equals(("BUSS").toLowerCase())
+                        || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
                     vehicle.setTransport("PUBLIC");
                 } else {
                     vehicle.setTransport("PRIVATE");
@@ -314,6 +339,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Response delete(Map<String, Object> input) {
+
+        logger.info("in VehicleServiceImpl.delete() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Vehicle vehicle = null;

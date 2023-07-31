@@ -6,6 +6,9 @@ import com.mera.thar.back_app.Model.City;
 import com.mera.thar.back_app.Repository.CityRepository;
 import com.mera.thar.back_app.Service.CityService;
 import com.mera.thar.back_app.Util.AppConstants;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
 
+    private static final Logger logger = LoggerFactory.getLogger(CityServiceImpl.class);
+
     private final CityRepository cityRepository;
 
     @Override
     public Response getById(Map<String, Object> input) {
+
+        logger.info("in CityServiceImpl.getById() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
@@ -56,6 +64,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
+
+        logger.info("in CityServiceImpl.getByName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
@@ -91,6 +102,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response getAll() {
+
+        logger.info("in CityServiceImpl.getAll() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -119,6 +133,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response save(Map<String, Object> input) {
+
+        logger.info("in CityServiceImpl.save() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -164,6 +181,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response update(Map<String, Object> input) {
+
+        logger.info("in CityServiceImpl.update() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
@@ -212,6 +232,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public Response delete(Map<String, Object> input) {
+
+        logger.info("in CityServiceImpl.delete() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         City city = null;

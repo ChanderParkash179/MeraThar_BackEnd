@@ -13,7 +13,7 @@ public class AppConstants {
     public static final String NOT_FOUND = "ERROR_404";
     public static final String INTERNAL_SERVER_ERROR = "ERROR_500";
 
-    // LOGIN CODES
+    // USER CODES
     public static final String USER_LOGIN = "SUCCESS_200";
     public static final String USER_CREATED = "SUCCESS_201";
     public static final String USER_FOUND = "SUCCESS_202";

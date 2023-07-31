@@ -9,6 +9,9 @@ import com.mera.thar.back_app.Repository.TouristPointRepository;
 import com.mera.thar.back_app.Service.TouristPointService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,11 +22,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TouristPointServiceImpl implements TouristPointService {
 
+    private static final Logger logger = LoggerFactory.getLogger(TouristPointServiceImpl.class);
+
     private final TouristPointRepository touristPointRepository;
     private final CityRepository cityRepository;
 
     @Override
     public Response getAllTouristPointsByCityName(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.getAllTouristPointsByCityName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
@@ -68,6 +76,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response getById(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.getById() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
@@ -103,6 +114,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.getByName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
@@ -138,6 +152,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response getAll() {
+
+        logger.info("in TouristPointServiceImpl.getAll() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -166,6 +183,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response save(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.save() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -234,6 +254,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response update(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.update() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
@@ -291,6 +314,9 @@ public class TouristPointServiceImpl implements TouristPointService {
 
     @Override
     public Response delete(Map<String, Object> input) {
+
+        logger.info("in TouristPointServiceImpl.delete() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         TouristPoint place = null;

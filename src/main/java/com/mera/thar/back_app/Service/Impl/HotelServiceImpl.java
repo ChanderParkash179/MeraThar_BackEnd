@@ -9,6 +9,9 @@ import com.mera.thar.back_app.Repository.HotelRepository;
 import com.mera.thar.back_app.Service.HotelService;
 import com.mera.thar.back_app.Util.AppConstants;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -19,11 +22,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
 
+    private static final Logger logger = LoggerFactory.getLogger(HotelServiceImpl.class);
+
     private final HotelRepository hotelRepository;
     private final CityRepository cityRepository;
 
     @Override
     public Response getAllHotelsByCityName(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.getAllHotelsByCityName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
@@ -68,6 +76,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response getById(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.getById() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
@@ -103,6 +114,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response getByName(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.getByName() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
@@ -138,6 +152,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response getAll() {
+
+        logger.info("in HotelServiceImpl.getAll() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -166,6 +183,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response save(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.save() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -236,6 +256,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response update(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.update() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
@@ -298,6 +321,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Response delete(Map<String, Object> input) {
+
+        logger.info("in HotelServiceImpl.delete() : {}");
+
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Hotel hotel = null;

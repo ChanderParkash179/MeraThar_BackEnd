@@ -30,7 +30,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response getAllRestaurantsByCityName(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.getAllRestaurantsByCityName() : {}");
+        logger.info("in RestaurantServiceImpl.getAllRestaurantsByCityName(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -64,11 +64,14 @@ public class RestaurantServiceImpl implements RestaurantService {
                 response.setResponseCode(AppConstants.OK);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.getAllRestaurantsByCityName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.getAllRestaurantsByCityName() : {} - end");
 
         return response;
     }
@@ -76,7 +79,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response getById(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.getById() : {}");
+        logger.info("in RestaurantServiceImpl.getById(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -103,10 +106,13 @@ public class RestaurantServiceImpl implements RestaurantService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.getById() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.getById() : {} - end");
 
         return response;
     }
@@ -114,7 +120,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response getByName(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.getByName() : {}");
+        logger.info("in RestaurantServiceImpl.getByName(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -140,11 +146,14 @@ public class RestaurantServiceImpl implements RestaurantService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.getByName() : {} - end");
 
         return response;
     }
@@ -152,7 +161,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response getAll() {
 
-        logger.info("in RestaurantServiceImpl.getAll() : {}");
+        logger.info("in RestaurantServiceImpl.getAll(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -171,11 +180,13 @@ public class RestaurantServiceImpl implements RestaurantService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
-
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.getAll() : {} - end");
 
         return response;
     }
@@ -183,7 +194,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response save(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.save() : {}");
+        logger.info("in RestaurantServiceImpl.save(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -241,14 +252,17 @@ public class RestaurantServiceImpl implements RestaurantService {
                             response.setResponseCode(AppConstants.CREATED);
                             response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
                             response.setResponseData(responseData);
-                            return response;
                         }
                     }
                 }
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.save() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.save() : {} - end");
 
         return response;
     }
@@ -256,7 +270,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response update(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.update() : {}");
+        logger.info("in RestaurantServiceImpl.update(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -309,11 +323,14 @@ public class RestaurantServiceImpl implements RestaurantService {
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.update() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.update() : {} - end");
 
         return response;
     }
@@ -321,7 +338,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Response delete(Map<String, Object> input) {
 
-        logger.info("in RestaurantServiceImpl.delete() : {}");
+        logger.info("in RestaurantServiceImpl.delete(): {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -352,10 +369,13 @@ public class RestaurantServiceImpl implements RestaurantService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
-            return response;
         } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in RestaurantServiceImpl.delete() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in RestaurantServiceImpl.delete() : {} - end");
 
         return response;
     }

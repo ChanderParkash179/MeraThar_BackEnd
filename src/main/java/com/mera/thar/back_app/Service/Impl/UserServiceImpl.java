@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response userSignUp(Map<String, Object> input) {
 
-        logger.info("in UserServiceImpl.userSignUp() : {}");
+        logger.info("in UserServiceImpl.userSignUp() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -105,8 +105,12 @@ public class UserServiceImpl implements UserService {
             response.setResponseCode(AppConstants.USER_SIGNUP_FAILED);
             response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_FAILED);
             response.setResponseData(responseData);
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.userSignUp() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in UserServiceImpl.userSignUp() : {} - end");
 
         return response;
     }
@@ -114,7 +118,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response userSignIn(Map<String, Object> input) {
 
-        logger.info("in UserServiceImpl.userSignIn() : {}");
+        logger.info("in UserServiceImpl.userSignIn() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -166,7 +170,6 @@ public class UserServiceImpl implements UserService {
                         response.setResponseCode(AppConstants.USER_LOGIN);
                         response.setResponseMessage(AppConstants.MSG_USER_LOGIN_SUCCESSFULLY);
                         response.setResponseData(responseData);
-                        return response;
                     } else {
                         responseData.put("user", null);
                         response.setResponseCode(AppConstants.USER_PASSWORD_INVALID);
@@ -181,15 +184,20 @@ public class UserServiceImpl implements UserService {
             response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
             response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
             response.setResponseData(responseData);
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.userSignIn() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in UserServiceImpl.userSignIn() : {} - end");
+
         return response;
     }
 
     @Override
     public Response findByEmail(Map<String, Object> input) {
 
-        logger.info("in UserServiceImpl.findByEmail() : {}");
+        logger.info("in UserServiceImpl.findByEmail() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -229,23 +237,27 @@ public class UserServiceImpl implements UserService {
                     response.setResponseCode(AppConstants.USER_FOUND);
                     response.setResponseMessage(AppConstants.MSG_USER_FOUND_SUCCESSFULLY);
                     response.setResponseData(responseData);
-                    return response;
                 }
             }
         } catch (Exception ex) {
             responseData.put("user", null);
-            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
-            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
+            response.setResponseCode(AppConstants.NULL);
+            response.setResponseMessage(AppConstants.MSG_NULL);
             response.setResponseData(responseData);
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.findByEmail() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in UserServiceImpl.findByEmail() : {} - end");
+
         return response;
     }
 
     @Override
     public Response deleteByEmail(Map<String, Object> input) {
 
-        logger.info("in UserServiceImpl.deleteByEmail() : {}");
+        logger.info("in UserServiceImpl.deleteByEmail() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -291,11 +303,16 @@ public class UserServiceImpl implements UserService {
             }
         } catch (Exception ex) {
             responseData.put("user", null);
-            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
-            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
+            response.setResponseCode(AppConstants.NULL);
+            response.setResponseMessage(AppConstants.MSG_NULL);
             response.setResponseData(responseData);
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.deleteByEmail() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in UserServiceImpl.deleteByEmail() : {} - end");
+
         return response;
     }
 }

@@ -30,7 +30,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response getAllTouristPointsByCityName(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.getAllTouristPointsByCityName() : {}");
+        logger.info("in TouristPointServiceImpl.getAllTouristPointsByCityName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -65,11 +65,14 @@ public class TouristPointServiceImpl implements TouristPointService {
                 response.setResponseCode(AppConstants.OK);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.getAllTouristPointsByCityName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.getAllTouristPointsByCityName() : {} - end");
 
         return response;
     }
@@ -77,7 +80,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response getById(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.getById() : {}");
+        logger.info("in TouristPointServiceImpl.getById() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -104,10 +107,14 @@ public class TouristPointServiceImpl implements TouristPointService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
+
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.getById() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.getById() : {} - end");
 
         return response;
     }
@@ -115,7 +122,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response getByName(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.getByName() : {}");
+        logger.info("in TouristPointServiceImpl.getByName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -141,11 +148,14 @@ public class TouristPointServiceImpl implements TouristPointService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.getByName() : {} - end");
 
         return response;
     }
@@ -153,7 +163,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response getAll() {
 
-        logger.info("in TouristPointServiceImpl.getAll() : {}");
+        logger.info("in TouristPointServiceImpl.getAll() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -172,11 +182,14 @@ public class TouristPointServiceImpl implements TouristPointService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.getAll() : {} - end");
 
         return response;
     }
@@ -184,7 +197,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response save(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.save() : {}");
+        logger.info("in TouristPointServiceImpl.save() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -240,14 +253,18 @@ public class TouristPointServiceImpl implements TouristPointService {
                             response.setResponseCode(AppConstants.CREATED);
                             response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
                             response.setResponseData(responseData);
-                            return response;
+
                         }
                     }
                 }
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.save() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.save() : {} - end");
 
         return response;
     }
@@ -255,7 +272,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response update(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.update() : {}");
+        logger.info("in TouristPointServiceImpl.update() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -303,11 +320,15 @@ public class TouristPointServiceImpl implements TouristPointService {
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
                 response.setResponseData(responseData);
-                return response;
+
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.update() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.update() : {} - end");
 
         return response;
     }
@@ -315,7 +336,7 @@ public class TouristPointServiceImpl implements TouristPointService {
     @Override
     public Response delete(Map<String, Object> input) {
 
-        logger.info("in TouristPointServiceImpl.delete() : {}");
+        logger.info("in TouristPointServiceImpl.delete() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -345,10 +366,14 @@ public class TouristPointServiceImpl implements TouristPointService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
-            return response;
+
         } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in TouristPointServiceImpl.delete() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in TouristPointServiceImpl.delete() : {} - end");
 
         return response;
     }

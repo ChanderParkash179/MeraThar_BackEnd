@@ -30,7 +30,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response getAllVehiclesByCityName(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.getAllVehiclesByCityName() : {}");
+        logger.info("in VehicleServiceImpl.getAllVehiclesByCityName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -65,11 +65,14 @@ public class VehicleServiceImpl implements VehicleService {
                 response.setResponseCode(AppConstants.OK);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.getAllVehiclesByCityName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.getAllVehiclesByCityName() : {} - end");
 
         return response;
     }
@@ -77,7 +80,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response getById(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.getById() : {}");
+        logger.info("in VehicleServiceImpl.getById() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -104,10 +107,13 @@ public class VehicleServiceImpl implements VehicleService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.getById() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.getById() : {} - end");
 
         return response;
     }
@@ -115,7 +121,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response getByName(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.getByName() : {}");
+        logger.info("in VehicleServiceImpl.getByName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -141,11 +147,13 @@ public class VehicleServiceImpl implements VehicleService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
-
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.getByName() : {} - end");
 
         return response;
     }
@@ -153,7 +161,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response getAll() {
 
-        logger.info("in VehicleServiceImpl.getAll() : {}");
+        logger.info("in VehicleServiceImpl.getAll() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -172,11 +180,14 @@ public class VehicleServiceImpl implements VehicleService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.getAll() : {} - end");
 
         return response;
     }
@@ -184,7 +195,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response save(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.save() : {}");
+        logger.info("in VehicleServiceImpl.save() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -251,14 +262,17 @@ public class VehicleServiceImpl implements VehicleService {
                             response.setResponseCode(AppConstants.CREATED);
                             response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
                             response.setResponseData(responseData);
-                            return response;
                         }
                     }
                 }
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.save() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.save() : {} - end");
 
         return response;
     }
@@ -266,7 +280,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response update(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.update() : {}");
+        logger.info("in VehicleServiceImpl.update() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -328,11 +342,14 @@ public class VehicleServiceImpl implements VehicleService {
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.update() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.update() : {} - end");
 
         return response;
     }
@@ -340,7 +357,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Response delete(Map<String, Object> input) {
 
-        logger.info("in VehicleServiceImpl.delete() : {}");
+        logger.info("in VehicleServiceImpl.delete() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -371,10 +388,14 @@ public class VehicleServiceImpl implements VehicleService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
-            return response;
+
         } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in VehicleServiceImpl.delete() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in VehicleServiceImpl.delete() : {} - end");
 
         return response;
     }

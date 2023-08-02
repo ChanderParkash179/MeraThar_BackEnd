@@ -30,7 +30,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response getAllHotelsByCityName(Map<String, Object> input) {
 
-        logger.info("in HotelServiceImpl.getAllHotelsByCityName() : {}");
+        logger.info("in HotelServiceImpl.getAllHotelsByCityName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -65,11 +65,14 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseCode(AppConstants.OK);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
                 response.setResponseData(responseData);
-                return response;
             }
-        } catch (Exception ex) {
+        } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.getAllHotelsByCityName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.getAllHotelsByCityName() : {} - end");
 
         return response;
     }
@@ -77,7 +80,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response getById(Map<String, Object> input) {
 
-        logger.info("in HotelServiceImpl.getById() : {}");
+        logger.info("in HotelServiceImpl.getById() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -105,9 +108,13 @@ public class HotelServiceImpl implements HotelService {
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
             return response;
-        } catch (Exception ex) {
+        } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.getById() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.getById() : {} - end");
 
         return response;
     }
@@ -115,7 +122,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response getByName(Map<String, Object> input) {
 
-        logger.info("in HotelServiceImpl.getByName() : {}");
+        logger.info("in HotelServiceImpl.getByName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -141,11 +148,13 @@ public class HotelServiceImpl implements HotelService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
-
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.getByName() : {} - end");
 
         return response;
     }
@@ -153,7 +162,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response getAll() {
 
-        logger.info("in HotelServiceImpl.getAll() : {}");
+        logger.info("in HotelServiceImpl.getAll() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -172,11 +181,14 @@ public class HotelServiceImpl implements HotelService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.getAll() : {} - end");
 
         return response;
     }
@@ -184,7 +196,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response save(Map<String, Object> input) {
 
-        logger.info("in HotelServiceImpl.save() : {}");
+        logger.info("in HotelServiceImpl.save() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -242,14 +254,17 @@ public class HotelServiceImpl implements HotelService {
                             response.setResponseCode(AppConstants.CREATED);
                             response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
                             response.setResponseData(responseData);
-                            return response;
                         }
                     }
                 }
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.save() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.save() : {} - end");
 
         return response;
     }
@@ -257,7 +272,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Response update(Map<String, Object> input) {
 
-        logger.info("in HotelServiceImpl.update() : {}");
+        logger.info("in HotelServiceImpl.update() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -310,11 +325,14 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.update() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.update() : {} - end");
 
         return response;
     }
@@ -353,10 +371,14 @@ public class HotelServiceImpl implements HotelService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
-            return response;
-        } catch (NotFoundException ex) {
+
+        } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in HotelServiceImpl.delete() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in HotelServiceImpl.delete() : {} - end");
 
         return response;
     }

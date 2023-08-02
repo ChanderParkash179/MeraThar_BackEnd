@@ -84,4 +84,6 @@ public class AppConstants {
     public static final String MSG_USER_DELETED_SUCCESSFULLY = "Requested User Deleted Successfully!";
     public static final String MSG_USER_DELETED_FAILED = "Requested User failed to Delete!";
 
+    public static final String MSG_NULL = "Requested User failed to Delete!";
+    public static final String NULL = "NULL_404";
 }

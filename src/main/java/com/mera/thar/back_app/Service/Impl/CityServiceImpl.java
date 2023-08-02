@@ -27,7 +27,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public Response getById(Map<String, Object> input) {
 
-        logger.info("in CityServiceImpl.getById() : {}");
+        logger.info("in CityServiceImpl.getById() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -54,10 +54,13 @@ public class CityServiceImpl implements CityService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.getById() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in CityServiceImpl.getById() : {} - end");
 
         return response;
     }
@@ -65,7 +68,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public Response getByName(Map<String, Object> input) {
 
-        logger.info("in CityServiceImpl.getByName() : {}");
+        logger.info("in CityServiceImpl.getByName() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -91,12 +94,15 @@ public class CityServiceImpl implements CityService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
 
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
-
+        
+        logger.info("in CityServiceImpl.getByName() : {} - end");
+        
         return response;
     }
 
@@ -122,19 +128,21 @@ public class CityServiceImpl implements CityService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
-            return response;
-
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
-
+        
+        logger.info("in CityServiceImpl.getAll() : {} - end");
+        
         return response;
     }
 
     @Override
     public Response save(Map<String, Object> input) {
 
-        logger.info("in CityServiceImpl.save() : {}");
+        logger.info("in CityServiceImpl.save() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -171,18 +179,21 @@ public class CityServiceImpl implements CityService {
 
                 }
             }
-
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.save() : {} - error");
             ex.printStackTrace();
         }
 
+        logger.info("in CityServiceImpl.save() : {} - end");
+        
         return response;
     }
 
     @Override
     public Response update(Map<String, Object> input) {
 
-        logger.info("in CityServiceImpl.update() : {}");
+        logger.info("in CityServiceImpl.update() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -221,19 +232,22 @@ public class CityServiceImpl implements CityService {
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
                 response.setResponseData(responseData);
-                return response;
             }
         } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.update() : {} - error");
             ex.printStackTrace();
         }
 
+        logger.info("in CityServiceImpl.update() : {} - end");
+        
         return response;
     }
 
     @Override
     public Response delete(Map<String, Object> input) {
 
-        logger.info("in CityServiceImpl.delete() : {}");
+        logger.info("in CityServiceImpl.delete() : {} - start");
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
@@ -264,10 +278,14 @@ public class CityServiceImpl implements CityService {
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
-            return response;
+
         } catch (NotFoundException ex) {
+            logger.error("" + ex);
+            logger.error("in CityServiceImpl.delete() : {} - error");
             ex.printStackTrace();
         }
+
+        logger.info("in CityServiceImpl.delete() : {} - end");
 
         return response;
     }

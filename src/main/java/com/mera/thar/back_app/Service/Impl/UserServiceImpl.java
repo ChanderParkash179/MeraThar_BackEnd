@@ -97,7 +97,6 @@ public class UserServiceImpl implements UserService {
                     response.setResponseCode(AppConstants.USER_CREATED);
                     response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_SUCCESSFULLY);
                     response.setResponseData(responseData);
-                    return response;
                 }
             }
         } catch (Exception ex) {
@@ -298,7 +297,6 @@ public class UserServiceImpl implements UserService {
                     response.setResponseCode(AppConstants.USER_DELETED);
                     response.setResponseMessage(AppConstants.MSG_USER_DELETED_SUCCESSFULLY);
                     response.setResponseData(responseData);
-                    return response;
                 }
             }
         } catch (Exception ex) {

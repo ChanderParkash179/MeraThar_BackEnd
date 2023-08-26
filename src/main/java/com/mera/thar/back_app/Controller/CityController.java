@@ -18,7 +18,6 @@ import java.util.*;
 @RestController
 @RequiredArgsConstructor
 public class CityController {
-
     private static final Logger logger = LoggerFactory.getLogger(CityController.class);
 
     private final CityService cityService;

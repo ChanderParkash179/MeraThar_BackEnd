@@ -2,6 +2,9 @@ package com.mera.thar.back_app.Controller;
 
 import com.mera.thar.back_app.Service.UserService;
 import lombok.RequiredArgsConstructor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +18,14 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
     @PostMapping("login")
     private ResponseEntity<?> login(@RequestBody Map<String, Object> request) {
         try {
+            logger.info("in UserController.login() : {}");
             return new ResponseEntity<>(this.userService.userSignIn(request), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -30,6 +35,7 @@ public class UserController {
     @PostMapping("register")
     private ResponseEntity<?> register(@RequestBody Map<String, Object> request) {
         try {
+            logger.info("in UserController.register() : {}");
             return new ResponseEntity<>(this.userService.userSignUp(request), HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,6 +45,7 @@ public class UserController {
     @PostMapping("email")
     private ResponseEntity<?> findByEmail(@RequestBody Map<String, Object> request) {
         try {
+            logger.info("in UserController.findByEmail() : {}");
             return new ResponseEntity<>(this.userService.findByEmail(request), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,6 +55,7 @@ public class UserController {
     @PostMapping("delete")
     private ResponseEntity<?> deleteByEmail(@RequestBody Map<String, Object> request) {
         try {
+            logger.info("in UserController.deleteByEmail() : {}");
             return new ResponseEntity<>(this.userService.deleteByEmail(request), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

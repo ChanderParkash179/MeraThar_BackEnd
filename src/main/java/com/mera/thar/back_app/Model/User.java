@@ -72,7 +72,8 @@ public class User {
         this.social = social;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String password, Gender gender, Social social) {
+    public User(Integer id, String firstName, String lastName, String email, String password, Gender gender,
+            Social social) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

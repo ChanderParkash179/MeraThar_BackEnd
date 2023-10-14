@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -249,6 +250,39 @@ public class UserServiceImpl implements UserService {
         }
 
         logger.info("in UserServiceImpl.findByEmail() : {} - end");
+
+        return response;
+    }
+
+    @Override
+    public Response list() {
+
+        logger.info("in UserServiceImpl.list() : {}");
+
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
+
+        try {
+            List<User> users = this.userRepository.findAllByOrderByIdAsc();
+
+            if (users == null) {
+                responseData.put("users", null);
+                response.setResponseCode(AppConstants.NOT_FOUND);
+                response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
+                response.setResponseData(responseData);
+                return response;
+            }
+            responseData.put("users", users);
+            response.setResponseCode(AppConstants.OK);
+            response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
+            response.setResponseData(responseData);
+        } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.list() : {} - error");
+            ex.printStackTrace();
+        }
+
+        logger.info("in UserServiceImpl.list() : {} - end");
 
         return response;
     }

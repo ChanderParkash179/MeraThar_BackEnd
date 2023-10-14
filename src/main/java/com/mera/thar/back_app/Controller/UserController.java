@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.Map;
 @RequestMapping("api/mera_thar/user/")
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -47,6 +49,16 @@ public class UserController {
         try {
             logger.info("in UserController.findByEmail() : {}");
             return new ResponseEntity<>(this.userService.findByEmail(request), HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("list")
+    private ResponseEntity<?> list() {
+        try {
+            logger.info("in UserController.list() : {}");
+            return new ResponseEntity<>(this.userService.list(), HttpStatus.OK);
         } catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

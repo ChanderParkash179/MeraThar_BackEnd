@@ -205,7 +205,7 @@ public class HotelServiceImpl implements HotelService {
         String address = (String) input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
 
         Hotel hotel = null;
 
@@ -229,8 +229,8 @@ public class HotelServiceImpl implements HotelService {
                         return response;
                     } else {
 
-                        City getCity = this.cityRepository.findById(city).get() != null
-                                ? this.cityRepository.findById(city).get()
+                        City getCity = this.cityRepository.findByName(city) != null
+                                ? this.cityRepository.findByName(city)
                                 : null;
 
                         if (getCity == null) {

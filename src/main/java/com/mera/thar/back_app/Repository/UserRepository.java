@@ -2,6 +2,8 @@ package com.mera.thar.back_app.Repository;
 
 import com.mera.thar.back_app.Model.User;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Transactional
     void deleteByEmail(String email);
+
+    List<User> findAllByOrderByIdAsc();
 }

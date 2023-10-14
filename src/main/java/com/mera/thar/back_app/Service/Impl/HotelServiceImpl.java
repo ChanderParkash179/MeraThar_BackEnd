@@ -210,51 +210,49 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = null;
 
         try {
-            {
-                if (name == null || name.isEmpty()) {
-                    responseData.put("hotel", null);
+            if (name == null || name.isEmpty()) {
+                responseData.put("hotel", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                Hotel alreadyHotelAvailable = this.hotelRepository.findByName(name);
+
+                if (alreadyHotelAvailable != null) {
+                    responseData.put("hotel", alreadyHotelAvailable);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
-                    response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
                     response.setResponseData(responseData);
                     return response;
                 } else {
 
-                    Hotel alreadyHotelAvailable = this.hotelRepository.findByName(name);
+                    City getCity = this.cityRepository.findByName(city) != null
+                            ? this.cityRepository.findByName(city)
+                            : null;
 
-                    if (alreadyHotelAvailable != null) {
-                        responseData.put("hotel", alreadyHotelAvailable);
-                        response.setResponseCode(AppConstants.BAD_REQUEST);
-                        response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
+                    if (getCity == null) {
+                        responseData.put("hotels", null);
+                        response.setResponseCode(AppConstants.NOT_FOUND);
+                        response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
                         response.setResponseData(responseData);
                         return response;
                     } else {
+                        hotel = new Hotel();
 
-                        City getCity = this.cityRepository.findByName(city) != null
-                                ? this.cityRepository.findByName(city)
-                                : null;
+                        hotel.setName(name);
+                        hotel.setAddress(address);
+                        hotel.setRating(rating);
+                        hotel.setPhone(phone);
+                        hotel.setCity(getCity);
 
-                        if (getCity == null) {
-                            responseData.put("hotels", null);
-                            response.setResponseCode(AppConstants.NOT_FOUND);
-                            response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
-                            response.setResponseData(responseData);
-                            return response;
-                        } else {
-                            hotel = new Hotel();
+                        this.hotelRepository.save(hotel);
 
-                            hotel.setName(name);
-                            hotel.setAddress(address);
-                            hotel.setRating(rating);
-                            hotel.setPhone(phone);
-                            hotel.setCity(getCity);
-
-                            this.hotelRepository.save(hotel);
-
-                            responseData.put("hotel", hotel);
-                            response.setResponseCode(AppConstants.CREATED);
-                            response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
-                            response.setResponseData(responseData);
-                        }
+                        responseData.put("hotel", hotel);
+                        response.setResponseCode(AppConstants.CREATED);
+                        response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
+                        response.setResponseData(responseData);
                     }
                 }
             }

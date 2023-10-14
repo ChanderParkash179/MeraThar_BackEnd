@@ -205,56 +205,54 @@ public class TouristPointServiceImpl implements TouristPointService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         String location = (String) input.get("location") != null ? (String) input.get("location") : null;
         String description = (String) input.get("description") != null ? (String) input.get("description") : null;
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
 
         TouristPoint place = null;
 
         try {
-            {
-                if (name == null || name.isEmpty()) {
-                    responseData.put("place", null);
+            if (name == null || name.isEmpty()) {
+                responseData.put("place", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                TouristPoint alreadyTouristPointAvailable = this.touristPointRepository.findByName(name);
+
+                if (alreadyTouristPointAvailable != null) {
+                    responseData.put("place", alreadyTouristPointAvailable);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
-                    response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
                     response.setResponseData(responseData);
                     return response;
                 } else {
 
-                    TouristPoint alreadyTouristPointAvailable = this.touristPointRepository.findByName(name);
+                    City getCity = this.cityRepository.findByName(city) != null
+                            ? this.cityRepository.findByName(city)
+                            : null;
 
-                    if (alreadyTouristPointAvailable != null) {
-                        responseData.put("place", alreadyTouristPointAvailable);
-                        response.setResponseCode(AppConstants.BAD_REQUEST);
-                        response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
+                    if (getCity == null) {
+                        responseData.put("places", null);
+                        response.setResponseCode(AppConstants.NOT_FOUND);
+                        response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
                         response.setResponseData(responseData);
                         return response;
                     } else {
+                        place = new TouristPoint();
 
-                        City getCity = this.cityRepository.findById(city).get() != null
-                                ? this.cityRepository.findById(city).get()
-                                : null;
+                        place.setName(name);
+                        place.setLocation(location);
+                        place.setDescription(description);
+                        place.setCity(getCity);
 
-                        if (getCity == null) {
-                            responseData.put("places", null);
-                            response.setResponseCode(AppConstants.NOT_FOUND);
-                            response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
-                            response.setResponseData(responseData);
-                            return response;
-                        } else {
-                            place = new TouristPoint();
+                        this.touristPointRepository.save(place);
 
-                            place.setName(name);
-                            place.setLocation(location);
-                            place.setDescription(description);
-                            place.setCity(getCity);
+                        responseData.put("place", place);
+                        response.setResponseCode(AppConstants.CREATED);
+                        response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
+                        response.setResponseData(responseData);
 
-                            this.touristPointRepository.save(place);
-
-                            responseData.put("place", place);
-                            response.setResponseCode(AppConstants.CREATED);
-                            response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
-                            response.setResponseData(responseData);
-
-                        }
                     }
                 }
             }

@@ -205,64 +205,63 @@ public class VehicleServiceImpl implements VehicleService {
         String type = (String) input.get("type") != null ? (String) input.get("type") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
 
         Vehicle vehicle = null;
 
         try {
-            {
-                if (name == null || name.isEmpty()) {
-                    responseData.put("vehicle", null);
+
+            if (name == null || name.isEmpty()) {
+                responseData.put("vehicle", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                Vehicle alreadyVehicleAvailable = this.vehicleRepository.findByName(name);
+
+                if (alreadyVehicleAvailable != null) {
+                    responseData.put("vehicle", alreadyVehicleAvailable);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
-                    response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
                     response.setResponseData(responseData);
                     return response;
                 } else {
 
-                    Vehicle alreadyVehicleAvailable = this.vehicleRepository.findByName(name);
+                    City getCity = this.cityRepository.findByName(city) != null
+                            ? this.cityRepository.findByName(city)
+                            : null;
 
-                    if (alreadyVehicleAvailable != null) {
-                        responseData.put("vehicle", alreadyVehicleAvailable);
-                        response.setResponseCode(AppConstants.BAD_REQUEST);
-                        response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
+                    if (getCity == null) {
+                        responseData.put("vehicles", null);
+                        response.setResponseCode(AppConstants.NOT_FOUND);
+                        response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
                         response.setResponseData(responseData);
                         return response;
                     } else {
+                        vehicle = new Vehicle();
 
-                        City getCity = this.cityRepository.findById(city).get() != null
-                                ? this.cityRepository.findById(city).get()
-                                : null;
+                        vehicle.setName(name);
+                        vehicle.setPrice(price);
+                        vehicle.setType(type);
+                        vehicle.setRating(rating);
+                        vehicle.setPhone(phone);
+                        vehicle.setCity(getCity);
 
-                        if (getCity == null) {
-                            responseData.put("vehicles", null);
-                            response.setResponseCode(AppConstants.NOT_FOUND);
-                            response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
-                            response.setResponseData(responseData);
-                            return response;
+                        if (vehicle.getType().equals(("BUSS").toLowerCase())
+                                || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                            vehicle.setTransport("PUBLIC");
                         } else {
-                            vehicle = new Vehicle();
-
-                            vehicle.setName(name);
-                            vehicle.setPrice(price);
-                            vehicle.setType(type);
-                            vehicle.setRating(rating);
-                            vehicle.setPhone(phone);
-                            vehicle.setCity(getCity);
-
-                            if (vehicle.getType().equals(("BUSS").toLowerCase())
-                                    || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
-                                vehicle.setTransport("PUBLIC");
-                            } else {
-                                vehicle.setTransport("PRIVATE");
-                            }
-
-                            this.vehicleRepository.save(vehicle);
-
-                            responseData.put("vehicle", vehicle);
-                            response.setResponseCode(AppConstants.CREATED);
-                            response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
-                            response.setResponseData(responseData);
+                            vehicle.setTransport("PRIVATE");
                         }
+
+                        this.vehicleRepository.save(vehicle);
+
+                        responseData.put("vehicle", vehicle);
+                        response.setResponseCode(AppConstants.CREATED);
+                        response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
+                        response.setResponseData(responseData);
                     }
                 }
             }

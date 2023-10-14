@@ -203,56 +203,54 @@ public class RestaurantServiceImpl implements RestaurantService {
         String address = (String) input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
 
         Restaurant restaurant = null;
 
         try {
-            {
-                if (name == null || name.isEmpty()) {
-                    responseData.put("restaurant", null);
+            if (name == null || name.isEmpty()) {
+                responseData.put("restaurant", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                Restaurant alreadyRestaurantAvailable = this.restaurantRepository.findByName(name);
+
+                if (alreadyRestaurantAvailable != null) {
+                    responseData.put("restaurant", alreadyRestaurantAvailable);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
-                    response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
                     response.setResponseData(responseData);
                     return response;
                 } else {
 
-                    Restaurant alreadyRestaurantAvailable = this.restaurantRepository.findByName(name);
+                    City getCity = this.cityRepository.findByName(city) != null
+                            ? this.cityRepository.findByName(city)
+                            : null;
 
-                    if (alreadyRestaurantAvailable != null) {
-                        responseData.put("restaurant", alreadyRestaurantAvailable);
-                        response.setResponseCode(AppConstants.BAD_REQUEST);
-                        response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
+                    if (getCity == null) {
+                        responseData.put("restaurants", null);
+                        response.setResponseCode(AppConstants.NOT_FOUND);
+                        response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
                         response.setResponseData(responseData);
                         return response;
                     } else {
+                        restaurant = new Restaurant();
 
-                        City getCity = this.cityRepository.findById(city).get() != null
-                                ? this.cityRepository.findById(city).get()
-                                : null;
+                        restaurant.setName(name);
+                        restaurant.setAddress(address);
+                        restaurant.setRating(rating);
+                        restaurant.setPhone(phone);
+                        restaurant.setCity(getCity);
 
-                        if (getCity == null) {
-                            responseData.put("restaurants", null);
-                            response.setResponseCode(AppConstants.NOT_FOUND);
-                            response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
-                            response.setResponseData(responseData);
-                            return response;
-                        } else {
-                            restaurant = new Restaurant();
+                        this.restaurantRepository.save(restaurant);
 
-                            restaurant.setName(name);
-                            restaurant.setAddress(address);
-                            restaurant.setRating(rating);
-                            restaurant.setPhone(phone);
-                            restaurant.setCity(getCity);
-
-                            this.restaurantRepository.save(restaurant);
-
-                            responseData.put("restaurant", restaurant);
-                            response.setResponseCode(AppConstants.CREATED);
-                            response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
-                            response.setResponseData(responseData);
-                        }
+                        responseData.put("restaurant", restaurant);
+                        response.setResponseCode(AppConstants.CREATED);
+                        response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
+                        response.setResponseData(responseData);
                     }
                 }
             }

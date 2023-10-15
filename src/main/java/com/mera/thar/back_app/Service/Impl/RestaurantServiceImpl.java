@@ -199,11 +199,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
-        String address = (String) input.get("address") != null ? (String) input.get("address") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
+        String address = input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
-        String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
-        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
+        String phone = input.get("phone") != null ? (String) input.get("phone") : null;
+        String city = input.get("city") != null ? (String) input.get("city") : null;
 
         Restaurant restaurant = null;
 
@@ -274,10 +274,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         Response response = new Response();
 
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
-        String address = (String) input.get("address") != null ? (String) input.get("address") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
+        String address = input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
-        String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
+        String phone = input.get("phone") != null ? (String) input.get("phone") : null;
 
         Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
 
@@ -317,6 +317,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurant.setCity(getCity);
 
                 this.restaurantRepository.save(restaurant);
+
                 responseData.put("restaurant", restaurant);
                 response.setResponseCode(AppConstants.CREATED);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
@@ -340,8 +341,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
+
         Restaurant restaurant = null;
+
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
+
         try {
 
             if (id == null || id == 0) {
@@ -363,10 +367,12 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
 
             this.restaurantRepository.deleteById(id);
+
             responseData.put("restaurant", restaurant);
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_DELETED);
             response.setResponseData(responseData);
+
         } catch (NotFoundException ex) {
             logger.error("" + ex);
             logger.error("in RestaurantServiceImpl.delete() : {} - error");

@@ -72,7 +72,7 @@ public class CityServiceImpl implements CityService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
 
         try {
             if (name == null || name.isEmpty()) {
@@ -100,9 +100,9 @@ public class CityServiceImpl implements CityService {
             logger.error("in CityServiceImpl.getByName() : {} - error");
             ex.printStackTrace();
         }
-        
+
         logger.info("in CityServiceImpl.getByName() : {} - end");
-        
+
         return response;
     }
 
@@ -133,9 +133,9 @@ public class CityServiceImpl implements CityService {
             logger.error("in CityServiceImpl.getAll() : {} - error");
             ex.printStackTrace();
         }
-        
+
         logger.info("in CityServiceImpl.getAll() : {} - end");
-        
+
         return response;
     }
 
@@ -147,37 +147,34 @@ public class CityServiceImpl implements CityService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
         City city = null;
         try {
-            {
-                if (name == null || name.isEmpty()) {
-                    responseData.put("city", null);
+            if (name == null || name.isEmpty()) {
+                responseData.put("city", null);
+                response.setResponseCode(AppConstants.BAD_REQUEST);
+                response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                City alreadyCityAvailable = this.cityRepository.findByName(name);
+
+                if (alreadyCityAvailable != null) {
+                    responseData.put("city", alreadyCityAvailable);
                     response.setResponseCode(AppConstants.BAD_REQUEST);
-                    response.setResponseMessage(AppConstants.MSG_NO_INPUT);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
                     response.setResponseData(responseData);
                     return response;
-                } else {
-
-                    City alreadyCityAvailable = this.cityRepository.findByName(name);
-
-                    if (alreadyCityAvailable != null) {
-                        responseData.put("city", alreadyCityAvailable);
-                        response.setResponseCode(AppConstants.BAD_REQUEST);
-                        response.setResponseMessage(AppConstants.MSG_RESOURCE_ALREADY_AVAILABLE);
-                        response.setResponseData(responseData);
-                        return response;
-                    }
-                    city = new City(name);
-                    this.cityRepository.save(city);
-
-                    responseData.put("city", city);
-                    response.setResponseCode(AppConstants.CREATED);
-                    response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
-                    response.setResponseData(responseData);
-                    return response;
-
                 }
+                city = new City(name);
+                this.cityRepository.save(city);
+
+                responseData.put("city", city);
+                response.setResponseCode(AppConstants.CREATED);
+                response.setResponseMessage(AppConstants.MSG_DATA_SAVED);
+                response.setResponseData(responseData);
+                return response;
             }
         } catch (Exception ex) {
             logger.error("" + ex);
@@ -186,7 +183,7 @@ public class CityServiceImpl implements CityService {
         }
 
         logger.info("in CityServiceImpl.save() : {} - end");
-        
+
         return response;
     }
 
@@ -198,8 +195,10 @@ public class CityServiceImpl implements CityService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
+
         City city = null;
+
         try {
 
             if (id == null || id == 0) {
@@ -240,7 +239,7 @@ public class CityServiceImpl implements CityService {
         }
 
         logger.info("in CityServiceImpl.update() : {} - end");
-        
+
         return response;
     }
 
@@ -251,8 +250,11 @@ public class CityServiceImpl implements CityService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
+        
         City city = null;
+
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
+
         try {
 
             if (id == null || id == 0) {

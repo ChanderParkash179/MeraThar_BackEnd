@@ -36,15 +36,17 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String firstName = (String) input.get("firstName") != null ? (String) input.get("firstName") : null;
-        String lastName = (String) input.get("lastName") != null ? (String) input.get("lastName") : null;
-        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
-        String password = (String) input.get("password") != null ? (String) input.get("password") : null;
-        String gender = (String) input.get("gender") != null ? (String) input.get("gender") : null;
+        String firstName = input.get("firstName") != null ? (String) input.get("firstName") : null;
+        String lastName = input.get("lastName") != null ? (String) input.get("lastName") : null;
+        String email = input.get("email") != null ? (String) input.get("email") : null;
+        String password = input.get("password") != null ? (String) input.get("password") : null;
+        String gender = input.get("gender") != null ? (String) input.get("gender") : null;
 
         email = email.toLowerCase();
         password = password.toString().trim();
+
         try {
+
             if (input.isEmpty()) {
                 responseData.put("user", null);
                 response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
@@ -71,6 +73,7 @@ public class UserServiceImpl implements UserService {
                 response.setResponseData(responseData);
                 return response;
             } else {
+
                 User user = this.userRepository.findByEmail(email);
 
                 if (user != null) {
@@ -80,6 +83,7 @@ public class UserServiceImpl implements UserService {
                     response.setResponseData(responseData);
                     return response;
                 } else {
+
                     String encodedPassword = passwordEncoder.encode(password);
 
                     Gender genderOfUser = Gender.valueOf(gender);
@@ -98,13 +102,10 @@ public class UserServiceImpl implements UserService {
                     response.setResponseCode(AppConstants.USER_CREATED);
                     response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_SUCCESSFULLY);
                     response.setResponseData(responseData);
+
                 }
             }
         } catch (Exception ex) {
-            responseData.put("user", null);
-            response.setResponseCode(AppConstants.USER_SIGNUP_FAILED);
-            response.setResponseMessage(AppConstants.MSG_USER_SIGNUP_FAILED);
-            response.setResponseData(responseData);
             logger.error("" + ex);
             logger.error("in UserServiceImpl.userSignUp() : {} - error");
             ex.printStackTrace();
@@ -123,8 +124,9 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
-        String password = (String) input.get("password") != null ? (String) input.get("password") : null;
+        String email = input.get("email") != null ? (String) input.get("email") : null;
+        String password = input.get("password") != null ? (String) input.get("password") : null;
+
         email = email.toLowerCase();
         password = password.toString().trim();
 
@@ -154,6 +156,7 @@ public class UserServiceImpl implements UserService {
                 response.setResponseData(responseData);
                 return response;
             } else {
+
                 User user = this.userRepository.findByEmail(email);
 
                 if (user == null) {
@@ -165,6 +168,7 @@ public class UserServiceImpl implements UserService {
                 } else {
 
                     boolean matchPassword = passwordEncoder.matches(password, user.getPassword());
+
                     if (matchPassword) {
                         responseData.put("user", user);
                         response.setResponseCode(AppConstants.USER_LOGIN);
@@ -180,10 +184,6 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (Exception ex) {
-            responseData.put("user", null);
-            response.setResponseCode(AppConstants.USER_LOGIN_FAILED);
-            response.setResponseMessage(AppConstants.MSG_USER_LOGIN_FAILED);
-            response.setResponseData(responseData);
             logger.error("" + ex);
             logger.error("in UserServiceImpl.userSignIn() : {} - error");
             ex.printStackTrace();
@@ -202,7 +202,7 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
+        String email = input.get("email") != null ? (String) input.get("email") : null;
 
         try {
             if (input.isEmpty()) {
@@ -240,10 +240,6 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (Exception ex) {
-            responseData.put("user", null);
-            response.setResponseCode(AppConstants.NULL);
-            response.setResponseMessage(AppConstants.MSG_NULL);
-            response.setResponseData(responseData);
             logger.error("" + ex);
             logger.error("in UserServiceImpl.findByEmail() : {} - error");
             ex.printStackTrace();
@@ -263,6 +259,7 @@ public class UserServiceImpl implements UserService {
         Response response = new Response();
 
         try {
+
             List<User> users = this.userRepository.findAllByOrderByIdAsc();
 
             if (users == null) {
@@ -272,10 +269,12 @@ public class UserServiceImpl implements UserService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             responseData.put("users", users);
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
+
         } catch (Exception ex) {
             logger.error("" + ex);
             logger.error("in UserServiceImpl.list() : {} - error");
@@ -295,7 +294,7 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String email = (String) input.get("email") != null ? (String) input.get("email") : null;
+        String email = input.get("email") != null ? (String) input.get("email") : null;
 
         try {
             if (input.isEmpty()) {
@@ -334,10 +333,6 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (Exception ex) {
-            responseData.put("user", null);
-            response.setResponseCode(AppConstants.NULL);
-            response.setResponseMessage(AppConstants.MSG_NULL);
-            response.setResponseData(responseData);
             logger.error("" + ex);
             logger.error("in UserServiceImpl.deleteByEmail() : {} - error");
             ex.printStackTrace();

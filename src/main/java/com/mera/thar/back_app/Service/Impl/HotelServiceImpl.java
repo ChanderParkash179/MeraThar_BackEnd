@@ -34,9 +34,10 @@ public class HotelServiceImpl implements HotelService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
-        String name = (String) input.get("cityName") != null ? (String) input.get("cityName") : null;
+        String name = input.get("cityName") != null ? (String) input.get("cityName") : null;
 
         try {
+
             if (name == null || name.isEmpty()) {
                 responseData.put("hotels", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -44,6 +45,7 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             City getCity = this.cityRepository.findByName(name) != null ? this.cityRepository.findByName(name) : null;
 
             if (getCity == null) {
@@ -54,6 +56,7 @@ public class HotelServiceImpl implements HotelService {
                 return response;
             } else {
                 List<Hotel> hotels = this.hotelRepository.findAllByCityName(name);
+
                 if (hotels == null) {
                     responseData.put("hotels", null);
                     response.setResponseCode(AppConstants.NOT_FOUND);
@@ -61,6 +64,7 @@ public class HotelServiceImpl implements HotelService {
                     response.setResponseData(responseData);
                     return response;
                 }
+
                 responseData.put("hotels", hotels);
                 response.setResponseCode(AppConstants.OK);
                 response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
@@ -84,9 +88,13 @@ public class HotelServiceImpl implements HotelService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
+
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : null;
+
         Hotel hotel = null;
+
         try {
+
             if (id == null || id == 0) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -94,6 +102,7 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             hotel = this.hotelRepository.findById(id).get();
 
             if (hotel == null) {
@@ -103,11 +112,13 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             responseData.put("hotel", hotel);
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
             return response;
+
         } catch (NotFoundException ex) {
             logger.error("" + ex);
             logger.error("in HotelServiceImpl.getById() : {} - error");
@@ -126,9 +137,11 @@ public class HotelServiceImpl implements HotelService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
+
+        String name = input.get("name") != null ? (String) input.get("name") : null;
 
         try {
+
             if (name == null || name.isEmpty()) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -136,7 +149,9 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             Hotel hotel = this.hotelRepository.findByName(name);
+
             if (hotel == null) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.NOT_FOUND);
@@ -144,10 +159,12 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             responseData.put("hotel", hotel);
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
             response.setResponseData(responseData);
+
         } catch (Exception ex) {
             logger.error("" + ex);
             logger.error("in HotelServiceImpl.getByName() : {} - error");
@@ -177,6 +194,7 @@ public class HotelServiceImpl implements HotelService {
                 response.setResponseData(responseData);
                 return response;
             }
+
             responseData.put("hotels", hotels);
             response.setResponseCode(AppConstants.OK);
             response.setResponseMessage(AppConstants.MSG_RESOURCE_FOUND);
@@ -201,15 +219,16 @@ public class HotelServiceImpl implements HotelService {
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
 
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
-        String address = (String) input.get("address") != null ? (String) input.get("address") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
+        String address = input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
-        String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
-        String city = (String) input.get("city") != null ? (String) input.get("city") : null;
+        String phone = input.get("phone") != null ? (String) input.get("phone") : null;
+        String city = input.get("city") != null ? (String) input.get("city") : null;
 
         Hotel hotel = null;
 
         try {
+
             if (name == null || name.isEmpty()) {
                 responseData.put("hotel", null);
                 response.setResponseCode(AppConstants.BAD_REQUEST);
@@ -239,6 +258,7 @@ public class HotelServiceImpl implements HotelService {
                         response.setResponseData(responseData);
                         return response;
                     } else {
+
                         hotel = new Hotel();
 
                         hotel.setName(name);
@@ -276,10 +296,10 @@ public class HotelServiceImpl implements HotelService {
         Response response = new Response();
 
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
-        String name = (String) input.get("name") != null ? (String) input.get("name") : null;
-        String address = (String) input.get("address") != null ? (String) input.get("address") : null;
+        String name = input.get("name") != null ? (String) input.get("name") : null;
+        String address = input.get("address") != null ? (String) input.get("address") : null;
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
-        String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
+        String phone = input.get("phone") != null ? (String) input.get("phone") : null;
 
         Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
 
@@ -342,8 +362,11 @@ public class HotelServiceImpl implements HotelService {
 
         Map<String, Object> responseData = new HashMap<>();
         Response response = new Response();
+
         Hotel hotel = null;
+
         Integer id = (Integer) input.get("id") != 0 ? (Integer) input.get("id") : 0;
+
         try {
 
             if (id == null || id == 0) {

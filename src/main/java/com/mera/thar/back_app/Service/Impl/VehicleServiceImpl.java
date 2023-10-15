@@ -234,7 +234,7 @@ public class VehicleServiceImpl implements VehicleService {
                             : null;
 
                     if (getCity == null) {
-                        responseData.put("vehicles", null);
+                        responseData.put("vehicle", null);
                         response.setResponseCode(AppConstants.NOT_FOUND);
                         response.setResponseMessage(AppConstants.MSG_RESOURCE_NOT_FOUND);
                         response.setResponseData(responseData);

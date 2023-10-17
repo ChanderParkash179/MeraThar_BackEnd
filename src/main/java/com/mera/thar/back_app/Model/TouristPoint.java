@@ -7,7 +7,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "TOURIST_POINT")
 @Setter
@@ -26,7 +25,7 @@ public class TouristPoint {
     @Column(name = "tp_description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;

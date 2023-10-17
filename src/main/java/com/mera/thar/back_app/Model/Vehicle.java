@@ -31,7 +31,7 @@ public class Vehicle {
     @Column(name = "vehicle_transport")
     private String transport;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;
@@ -68,7 +68,8 @@ public class Vehicle {
         this.type = type;
     }
 
-    public Vehicle(Integer id, String name, String transport, String price, String phone, double rating, String type, City city) {
+    public Vehicle(Integer id, String name, String transport, String price, String phone, double rating, String type,
+            City city) {
         this.id = id;
         this.name = name;
         this.price = price;

@@ -25,7 +25,7 @@ public class TouristPoint {
     @Column(name = "tp_description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;

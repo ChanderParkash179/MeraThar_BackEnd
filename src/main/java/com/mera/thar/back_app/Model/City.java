@@ -14,12 +14,7 @@ import java.util.*;
 public class City {
 
     @Id
-    @SequenceGenerator(
-            name = "city_sequence",
-            sequenceName = "city_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "city_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id")
     private Integer id;
     @Column(name = "city_name")

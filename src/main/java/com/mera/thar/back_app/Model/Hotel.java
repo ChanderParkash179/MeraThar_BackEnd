@@ -25,7 +25,7 @@ public class Hotel {
     @Column(name = "hotel_ratings")
     private double rating;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;

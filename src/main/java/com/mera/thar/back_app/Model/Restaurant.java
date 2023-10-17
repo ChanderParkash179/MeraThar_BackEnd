@@ -27,7 +27,7 @@ public class Restaurant {
     @Column(name = "restaurant_ratings")
     private double rating;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     @JoinColumn(name = "city_id")
     private City city;

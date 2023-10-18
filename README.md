@@ -18,6 +18,9 @@ Mera Thar Backend comes with a variety of features to support tourism-related ac
 
 5. **Travel Guide**: Provide a comprehensive travel guide with essential information about the region, local customs, cultural events, transportation options, and safety tips.
 
+## Data Model
+![Data Model of Mera Thar](https://github.com/ChanderParkash179/MeraThar_BackEnd/assets/57979978/ec691766-9cf5-4c3a-b8b9-2a287cce4c5a)
+
 ## Prerequisites
 
 Before running the Mera Thar Backend project, ensure that you have the following prerequisites:

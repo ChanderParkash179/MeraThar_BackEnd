@@ -26,6 +26,10 @@ public class City {
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
+    private List<Restaurant> restaurants;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Vehicle> vehicles;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)

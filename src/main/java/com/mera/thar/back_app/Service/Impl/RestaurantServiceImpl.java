@@ -279,7 +279,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = input.get("phone") != null ? (String) input.get("phone") : null;
 
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = input.get("city") != null ? (String) input.get("city") : null;
 
         Restaurant restaurant = null;
         try {
@@ -299,7 +299,9 @@ public class RestaurantServiceImpl implements RestaurantService {
                 return response;
             }
 
-            City getCity = this.cityRepository.findById(city).get();
+            City getCity = this.cityRepository.findByName(city) != null
+                    ? this.cityRepository.findByName(city)
+                    : null;
 
             restaurant = this.restaurantRepository.findById(id).get();
 

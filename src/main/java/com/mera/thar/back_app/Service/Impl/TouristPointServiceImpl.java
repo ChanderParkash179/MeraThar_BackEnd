@@ -278,7 +278,8 @@ public class TouristPointServiceImpl implements TouristPointService {
         String name = (String) input.get("name") != null ? (String) input.get("name") : null;
         String location = (String) input.get("location") != null ? (String) input.get("location") : null;
         String description = (String) input.get("description") != null ? (String) input.get("description") : null;
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+
+        String city = input.get("city") != null ? (String) input.get("city") : null;
 
         TouristPoint place = null;
         try {
@@ -297,7 +298,9 @@ public class TouristPointServiceImpl implements TouristPointService {
                 return response;
             }
 
-            City getCity = this.cityRepository.findById(city).get();
+            City getCity = this.cityRepository.findByName(city) != null
+                    ? this.cityRepository.findByName(city)
+                    : null;
 
             place = this.touristPointRepository.findById(id).get();
 

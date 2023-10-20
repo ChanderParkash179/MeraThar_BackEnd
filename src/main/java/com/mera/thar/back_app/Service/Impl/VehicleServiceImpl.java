@@ -291,7 +291,7 @@ public class VehicleServiceImpl implements VehicleService {
         Double rating = (Double) input.get("rating") != 0 ? (Double) input.get("rating") : 0;
         String phone = (String) input.get("phone") != null ? (String) input.get("phone") : null;
 
-        Integer city = (Integer) input.get("city") != null ? (Integer) input.get("city") : null;
+        String city = input.get("city") != null ? (String) input.get("city") : null;
 
         Vehicle vehicle = null;
         try {
@@ -311,7 +311,9 @@ public class VehicleServiceImpl implements VehicleService {
                 return response;
             }
 
-            City getCity = this.cityRepository.findById(city).get();
+            City getCity = this.cityRepository.findByName(city) != null
+                    ? this.cityRepository.findByName(city)
+                    : null;
 
             vehicle = this.vehicleRepository.findById(id).get();
 

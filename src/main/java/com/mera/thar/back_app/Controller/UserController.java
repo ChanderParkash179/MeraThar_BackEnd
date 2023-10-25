@@ -44,6 +44,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("edit")
+    private ResponseEntity<?> edit(@RequestBody Map<String, Object> request) {
+        try {
+            logger.info("in UserController.edit() : {}");
+            return new ResponseEntity<>(this.userService.userEdit(request), HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("email")
     private ResponseEntity<?> findByEmail(@RequestBody Map<String, Object> request) {
         try {

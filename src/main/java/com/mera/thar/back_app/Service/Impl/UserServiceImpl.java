@@ -117,6 +117,92 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Response userEdit(Map<String, Object> input) {
+
+        logger.info("in UserServiceImpl.userSignUp() : {} - start");
+
+        Map<String, Object> responseData = new HashMap<>();
+        Response response = new Response();
+
+        String firstName = input.get("firstName") != null ? (String) input.get("firstName") : null;
+        String lastName = input.get("lastName") != null ? (String) input.get("lastName") : null;
+        String email = input.get("email") != null ? (String) input.get("email") : null;
+        String password = input.get("password") != null ? (String) input.get("password") : null;
+        String gender = input.get("gender") != null ? (String) input.get("gender") : null;
+
+        email = email.toLowerCase();
+        password = password.toString().trim();
+
+        try {
+
+            if (input.isEmpty()) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_INPUT_EMPTY);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_INVALID);
+                response.setResponseData(responseData);
+                return response;
+            } else if (firstName.isEmpty() && lastName.isEmpty() && email.isEmpty() && password.isEmpty()
+                    && gender.toString().isEmpty()) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_PARAMETERS_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_PARAMETERS_UNAVAILABLE);
+                response.setResponseData(responseData);
+                return response;
+            } else if (!SystemUtils.validateEmail(email)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_EMAIL_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_EMAIL_POLICY);
+                response.setResponseData(responseData);
+                return response;
+            } else if (!SystemUtils.validatePassword(password)) {
+                responseData.put("user", null);
+                response.setResponseCode(AppConstants.USER_PASSWORD_INVALID);
+                response.setResponseMessage(AppConstants.MSG_USER_PASSWORD_POLICY);
+                response.setResponseData(responseData);
+                return response;
+            } else {
+
+                User user = this.userRepository.findByEmail(email);
+
+                if (user == null) {
+                    responseData.put("user", null);
+                    response.setResponseCode(AppConstants.NOT_FOUND);
+                    response.setResponseMessage(AppConstants.MSG_USER_UPDATE_FAILED);
+                    response.setResponseData(responseData);
+                    return response;
+                } else {
+
+                    String encodedPassword = passwordEncoder.encode(password);
+
+                    Gender genderOfUser = Gender.valueOf(gender);
+
+                    user.setFirstName(firstName);
+                    user.setLastName(lastName);
+                    user.setEmail(email);
+                    user.setSocial(Social.APPLICATION);
+                    user.setGender(genderOfUser);
+                    user.setPassword(encodedPassword);
+
+                    this.userRepository.save(user);
+
+                    responseData.put("user", user);
+                    response.setResponseCode(AppConstants.CREATED);
+                    response.setResponseMessage(AppConstants.MSG_RESOURCE_UPDATED);
+                    response.setResponseData(responseData);
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("" + ex);
+            logger.error("in UserServiceImpl.userEdit() : {} - error");
+            ex.printStackTrace();
+        }
+
+        logger.info("in UserServiceImpl.userEdit() : {} - end");
+
+        return response;
+    }
+
+    @Override
     public Response userSignIn(Map<String, Object> input) {
 
         logger.info("in UserServiceImpl.userSignIn() : {} - start");

@@ -76,6 +76,7 @@ public class AppConstants {
     public static final String MSG_USER_PASSWORD_INCORRECT = "Requested User's Password is Incorrect";
     public static final String MSG_USER_SIGNUP_SUCCESSFULLY = "Requested User is Registered Successfully";
     public static final String MSG_USER_SIGNUP_FAILED = "Requested User is Registered Failed Due to Some Issue";
+    public static final String MSG_USER_UPDATE_FAILED = "Requested User is Edit Failed Due to Some Issue";
     public static final String MSG_USER_PARAMETERS_UNAVAILABLE = "Some Requested Parameters are Unavailable";
     public static final String MSG_USER_PARAMETERS_INVALID = "Input Fields are Empty or Invalid";
     public static final String MSG_USER_EMAIL_POLICY = "Provided Email doesn't meet the policy";

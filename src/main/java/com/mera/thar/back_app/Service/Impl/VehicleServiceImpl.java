@@ -249,8 +249,8 @@ public class VehicleServiceImpl implements VehicleService {
                         vehicle.setPhone(phone);
                         vehicle.setCity(getCity);
 
-                        if (vehicle.getType().equals(("BUSS").toLowerCase())
-                                || vehicle.getType().equals(("RIKSHAW").toLowerCase())) {
+                        if (vehicle.getType().equals(("BUS"))
+                                || vehicle.getType().equals(("RIKSHAW"))) {
                             vehicle.setTransport("PUBLIC");
                         } else {
                             vehicle.setTransport("PRIVATE");
